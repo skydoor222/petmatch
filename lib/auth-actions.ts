@@ -71,3 +71,37 @@ export async function saveProfile(formData: FormData) {
 
     redirect('/');
 }
+
+export async function createBookingRequest(formData: FormData) {
+    const supabase = await createClient();
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+        throw new Error('Unauthorized');
+    }
+
+    const mateId = formData.get('mateId') as string;
+    const serviceType = formData.get('serviceType') as string;
+    const bookingDate = formData.get('bookingDate') as string;
+    const hours = parseInt(formData.get('hours') as string) || 1;
+    const totalPrice = parseInt(formData.get('totalPrice') as string);
+    const notes = formData.get('notes') as string;
+
+    const { error } = await supabase.from('booking_requests').insert({
+        owner_id: user.id,
+        mate_id: mateId,
+        service_type: serviceType,
+        booking_date: bookingDate,
+        hours,
+        total_price: totalPrice,
+        notes,
+        status: 'pending'
+    });
+
+    if (error) {
+        console.error('Error creating booking request:', error);
+        return { error: error.message };
+    }
+
+    redirect(`/request/${mateId}/success`);
+}
