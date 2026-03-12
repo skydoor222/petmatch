@@ -10,6 +10,7 @@ export default function SignUpPage() {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        if (loading) return; // Prevent double submission
         setLoading(true);
         setError('');
 
@@ -28,11 +29,25 @@ export default function SignUpPage() {
             return;
         }
 
-        const result = await signUp(formData);
-        if (result?.error) {
-            setError(result.error);
+        try {
+            const result = await signUp(formData);
+            if (result?.error) {
+                // Translate common Supabase errors to Japanese
+                const msg = result.error;
+                if (msg.includes('security purposes') || msg.includes('3 seconds')) {
+                    setError('少し時間をおいてから再度お試しください（3秒以上）');
+                } else if (msg.includes('already registered') || msg.includes('already exists')) {
+                    setError('このメールアドレスはすでに登録されています');
+                } else if (msg.includes('invalid email') || msg.includes('Invalid email')) {
+                    setError('メールアドレスの形式が正しくありません');
+                } else {
+                    setError(msg);
+                }
+                setLoading(false);
+            }
+        } catch {
+            // redirect() throws an error in Server Actions — this is expected
         }
-        setLoading(false);
     }
 
     return (
