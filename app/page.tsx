@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import MateCard from '@/components/MateCard';
 import BottomNav from '@/components/BottomNav';
-import { MATES } from '@/lib/mockData';
+import { getMates } from '@/lib/supabase';
 
 const SERVICES = [
   { type: 'walk', label: '🐕 散歩代行' },
@@ -11,7 +11,9 @@ const SERVICES = [
   { type: 'long_stay', label: '✈️ 長期不在' },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const mates = await getMates();
+
   return (
     <div className="pb-28">
       {/* Hero Search */}
@@ -68,7 +70,7 @@ export default function Home() {
       <div className="px-4">
         <h2 className="text-lg font-bold text-gray-900 mb-3">近くのMate</h2>
         <div className="flex flex-col gap-3.5">
-          {MATES.map(mate => <MateCard key={mate.id} mate={mate} />)}
+          {mates.map((mate: any) => <MateCard key={mate.id} mate={mate} />)}
         </div>
       </div>
 

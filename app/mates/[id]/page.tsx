@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import TrustScoreCard from '@/components/TrustScoreCard';
-import { MATES } from '@/lib/mockData';
-import { SERVICE_LABELS, SERVICE_ICONS, SERVICE_DESCRIPTIONS } from '@/lib/types';
+import { getMateById } from '@/lib/supabase';
+import { SERVICE_LABELS, SERVICE_ICONS, SERVICE_DESCRIPTIONS, ServiceType } from '@/lib/types';
 
 const CALENDAR_DAYS = Array.from({ length: 21 }, (_, i) => i + 1);
 
 export default async function MateDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const mate = MATES.find(m => m.id === id);
+  const mate: any = await getMateById(id);
   if (!mate) notFound();
 
   return (
@@ -34,7 +34,7 @@ export default async function MateDetailPage({ params }: { params: Promise<{ id:
         </div>
         <div className="text-right">
           <div className="text-2xl font-extrabold text-emerald-700">
-            ¥{Math.min(...mate.services.map(s => s.pricePerHour)).toLocaleString()}
+            ¥{Math.min(...mate.services.map((s: any) => s.pricePerHour)).toLocaleString()}
             <span className="text-sm font-normal text-gray-400">/h〜</span>
           </div>
           {mate.repeatCount && (
@@ -51,7 +51,7 @@ export default async function MateDetailPage({ params }: { params: Promise<{ id:
         <h2 className="text-sm font-bold text-gray-900 mb-2">👋 自己紹介</h2>
         <p className="text-sm text-gray-600 leading-relaxed">{mate.bio}</p>
         <div className="flex flex-wrap gap-1.5 mt-3">
-          {mate.tags.map(tag => (
+          {mate.tags.map((tag: string) => (
             <span key={tag} className="bg-emerald-50 text-emerald-700 text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>
           ))}
         </div>
@@ -61,12 +61,12 @@ export default async function MateDetailPage({ params }: { params: Promise<{ id:
       <section className="bg-white px-4 py-4 mt-2">
         <h2 className="text-sm font-bold text-gray-900 mb-3">🛎 対応サービス</h2>
         <div className="flex flex-col gap-2">
-          {mate.services.map(s => (
+          {mate.services.map((s: any) => (
             <div key={s.type} className="flex items-center gap-3 bg-gray-50 rounded-xl p-3">
-              <span className="text-xl">{SERVICE_ICONS[s.type]}</span>
+              <span className="text-xl">{SERVICE_ICONS[s.type as ServiceType]}</span>
               <div className="flex-1">
-                <div className="text-sm font-bold text-gray-900">{SERVICE_LABELS[s.type]}</div>
-                <div className="text-xs text-gray-400 mt-0.5">{SERVICE_DESCRIPTIONS[s.type]}</div>
+                <div className="text-sm font-bold text-gray-900">{SERVICE_LABELS[s.type as ServiceType]}</div>
+                <div className="text-xs text-gray-400 mt-0.5">{SERVICE_DESCRIPTIONS[s.type as ServiceType]}</div>
               </div>
               <div className="text-sm font-bold text-emerald-700">¥{s.pricePerHour.toLocaleString()}/h</div>
             </div>
@@ -78,11 +78,11 @@ export default async function MateDetailPage({ params }: { params: Promise<{ id:
       <section className="bg-white px-4 py-4 mt-2">
         <h2 className="text-sm font-bold text-gray-900 mb-3">📅 空き状況（3月）</h2>
         <div className="grid grid-cols-7 gap-1 text-center">
-          {['月','火','水','木','金','土','日'].map(d => (
+          {['月', '火', '水', '木', '金', '土', '日'].map(d => (
             <div key={d} className="text-[10px] font-semibold text-gray-400 py-1">{d}</div>
           ))}
           {/* padding for first week */}
-          {[1,2,3,4].map(i => <div key={`p${i}`} />)}
+          {[1, 2, 3, 4].map(i => <div key={`p${i}`} />)}
           {CALENDAR_DAYS.map(day => {
             const available = mate.availableDates.includes(day);
             return (
@@ -102,7 +102,7 @@ export default async function MateDetailPage({ params }: { params: Promise<{ id:
       <section className="bg-white px-4 py-4 mt-2">
         <h2 className="text-sm font-bold text-gray-900 mb-3">⭐ レビュー（{mate.reviews.length}件）</h2>
         <div className="flex flex-col gap-3">
-          {mate.reviews.map(review => (
+          {mate.reviews.map((review: any) => (
             <div key={review.id} className="bg-gray-50 rounded-xl p-3">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-sm">{review.ownerEmoji}</div>
