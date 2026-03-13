@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Search, MessageSquare, User } from 'lucide-react';
+import { Home, Search, MessageSquare, User, PawPrint } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { label: 'ペット', href: '/', icon: Home },
+  { label: 'ペット', href: '/', icon: PawPrint },
   { label: '依頼する', href: '/mates', icon: Search },
   { label: 'メッセージ', href: '/messages', icon: MessageSquare },
   { label: 'マイページ', href: '/mypage', icon: User },

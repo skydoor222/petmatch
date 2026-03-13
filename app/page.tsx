@@ -25,9 +25,9 @@ export default async function HomePage() {
   return (
     <div className="pb-36 bg-gray-50/50 min-h-screen">
       {/* Premium Search Header */}
-      <div className="bg-white px-6 pt-16 pb-8 sticky top-0 z-30 shadow-sm border-b border-gray-100/50">
+      <div className="bg-white px-6 pt-12 pb-6 sticky top-0 z-30 shadow-sm border-b border-gray-100/50">
         <div className="max-w-md mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-2xl bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-900/20">
                 <Dog size={20} />
