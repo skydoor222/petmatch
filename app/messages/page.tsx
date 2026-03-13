@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import BottomNav from '@/components/BottomNav';
 import { MATES } from '@/lib/mockData';
 import { MessageSquare, Calendar } from 'lucide-react';
@@ -33,9 +34,9 @@ const MESSAGES = [
 ];
 
 const STATUS_LABELS: Record<string, { label: string; className: string }> = {
-  pending:   { label: '承認待ち', className: 'text-orange-500' },
+  pending: { label: '承認待ち', className: 'text-orange-500' },
   confirmed: { label: '確定済み', className: 'text-blue-500' },
-  completed: { label: '完了',     className: 'text-gray-400' },
+  completed: { label: '完了', className: 'text-gray-400' },
 };
 
 export default function MessagesPage() {
@@ -50,7 +51,7 @@ export default function MessagesPage() {
         {MESSAGES.map(({ id, mate, lastMsg, time, unread, status }) => {
           const st = STATUS_LABELS[status];
           return (
-            <div key={id} className="bg-white rounded-2xl p-4 border border-gray-100">
+            <Link key={id} href={`/messages/${id}`} className="block bg-white rounded-2xl p-4 border border-gray-100 hover:border-orange-200 transition-colors">
               <div className="flex items-start gap-3">
                 <div className="relative shrink-0">
                   <div className="w-12 h-12 rounded-xl overflow-hidden">
@@ -74,7 +75,7 @@ export default function MessagesPage() {
                   <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">{lastMsg}</p>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
 
