@@ -93,16 +93,12 @@ export default async function HomePage() {
               <Plus size={24} className="text-gray-300" />
             </div>
             <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No active requests</p>
-            {petsError && (
-              <p className="text-[10px] text-rose-500 mt-2 font-mono">
-                Error: {petsError.message} ({petsError.code})
-              </p>
-            )}
-            {!petsError && petsData?.length === 0 && (
-              <p className="text-[10px] text-teal-500 mt-2 font-mono">
-                Connected to DB (0 rows)
-              </p>
-            )}
+            <div className="mt-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 font-mono text-[10px] text-left">
+              <p>Debug Info:</p>
+              <p>Pets Count: {petsData?.length ?? 'undefined'}</p>
+              {petsError && <p className="text-rose-500">Error: {petsError.message} ({petsError.code})</p>}
+              <p>Env URL: {process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 15)}...</p>
+            </div>
           </div>
         )}
       </div>
