@@ -1,84 +1,87 @@
 import Link from 'next/link';
 import { Mate, SERVICE_LABELS } from '@/lib/types';
-import { Star, MapPin, ShieldCheck, RefreshCw } from 'lucide-react';
+import { Star, MapPin, ShieldCheck, RefreshCw, ChevronRight } from 'lucide-react';
 
 interface Props { mate: Mate; }
 
 export default function MateCard({ mate }: Props) {
-  const minPrice = Math.min(...mate.services.map(s => s.pricePerHour));
-
   return (
     <Link
       href={`/mates/${mate.id}`}
-      className="block bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all hover:border-gray-200 hover:shadow-md active:scale-[0.99]"
+      className="group block bg-white rounded-[2.5rem] border border-gray-100 p-5 transition-all hover:border-orange-100 hover:shadow-xl hover:shadow-orange-900/5 active:scale-[0.98] relative overflow-hidden"
     >
-      {/* 画像エリア */}
-      <div className="relative h-52 bg-gray-100 overflow-hidden">
-        {mate.imageUrl ? (
-          <img
-            src={mate.imageUrl}
-            alt={mate.name}
-            className="w-full h-full object-cover object-top"
-          />
-        ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${mate.bgGradient}`} />
-        )}
-
-        <div className="absolute bottom-3 left-3 bg-white/90 rounded-lg px-2 py-1 flex items-center gap-1 shadow-sm">
-          <Star size={12} className="text-amber-400 fill-amber-400" />
-          <span className="text-xs font-semibold text-gray-800">{mate.trustScore.avgRating}</span>
-          <span className="text-xs text-gray-400">({mate.trustScore.completedCount}件)</span>
+      <div className="flex gap-5 relative z-10">
+        {/* 左側: アイコン / プロフィール画像 */}
+        <div className="flex-shrink-0">
+          <div className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg border-2 border-white relative group-hover:rotate-3 transition-transform">
+            {mate.imageUrl ? (
+              <img
+                src={mate.imageUrl}
+                alt={mate.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className={`w-full h-full bg-gradient-to-br ${mate.bgGradient} flex items-center justify-center text-2xl`}>
+                {mate.emoji}
+              </div>
+            )}
+            {/* Status Indicator */}
+            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-4 border-white" />
+          </div>
         </div>
 
-        {mate.isNew && (
-          <div className="absolute top-3 right-3 bg-orange-600 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
-            新規
+        {/* 右側: 情報エリア */}
+        <div className="flex-1 min-w-0 pt-0.5">
+          <div className="flex justify-between items-start mb-2">
+            <div>
+              <h3 className="text-lg font-heading text-gray-900 leading-tight mb-0.5">{mate.name} さん</h3>
+              <div className="flex items-center gap-1.5 text-orange-600">
+                <Star size={12} fill="currentColor" />
+                <span className="text-[11px] font-black">{mate.trustScore.avgRating}</span>
+                <span className="text-[10px] font-black text-gray-300 ml-1">({mate.trustScore.completedCount} 完了)</span>
+              </div>
+            </div>
+            <div className="w-8 h-8 rounded-xl bg-gray-50 flex items-center justify-center text-gray-300 group-hover:text-orange-500 group-hover:bg-orange-50 transition-all">
+              <ChevronRight size={18} />
+            </div>
           </div>
-        )}
+
+          <p className="text-sm font-medium text-gray-500 mb-4 line-clamp-1 opacity-70">
+            {mate.bio || '大切な家族のように、まごころ込めて丁寧にお世話いたします。'}
+          </p>
+
+          <div className="flex items-center justify-between">
+            <div className="flex gap-1.5">
+              {mate.services.slice(0, 2).map(s => (
+                <span
+                  key={s.type}
+                  className="text-[9px] font-black text-gray-400 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100 uppercase tracking-tight"
+                >
+                  {SERVICE_LABELS[s.type]}
+                </span>
+              ))}
+              {mate.services.length > 2 && (
+                <span className="text-[9px] font-black text-gray-300 pt-1">+{mate.services.length - 2}</span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 text-[10px] font-black text-teal-600 bg-teal-50 px-2 py-0.5 rounded-lg border border-teal-100">
+                <ShieldCheck size={10} />
+                <span>スコア {mate.trustScore.score}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* 情報エリア */}
-      <div className="p-4">
-        <div className="flex justify-between items-start gap-3 mb-2.5">
-          <div className="flex-1 min-w-0">
-            <h3 className="text-base font-semibold text-gray-900 truncate">{mate.name} さん</h3>
-            <div className="flex items-center gap-1 text-gray-400 text-xs mt-0.5">
-              <MapPin size={11} className="text-orange-500 shrink-0" />
-              <span className="truncate">{mate.area}</span>
-            </div>
-          </div>
-          <div className="text-right shrink-0">
-            <div className="text-xs text-gray-400 mb-0.5">〜</div>
-            <div className="text-lg font-bold text-gray-900 leading-tight">
-              ¥{minPrice.toLocaleString()}
-              <span className="text-xs font-normal text-gray-400">/h</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-1.5 mb-3">
-          {mate.services.map(s => (
-            <span
-              key={s.type}
-              className="text-[11px] text-gray-500 bg-gray-50 border border-gray-100 px-2.5 py-0.5 rounded-full"
-            >
-              {SERVICE_LABELS[s.type]}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center justify-between pt-3 border-t border-gray-50">
-          <div className="flex items-center gap-1 text-xs text-gray-400">
-            <ShieldCheck size={12} className="text-orange-500" />
-            <span>信頼スコア {mate.trustScore.score}</span>
-          </div>
-          {mate.repeatCount && (
-            <div className="flex items-center gap-1 text-xs text-orange-600 font-medium">
-              <RefreshCw size={11} />
-              <span>{mate.repeatCount}回継続</span>
-            </div>
-          )}
-        </div>
+      {/* 装飾的な背景画像 (情緒的な演出) */}
+      <div className="absolute top-0 right-0 w-32 h-full opacity-[0.03] group-hover:opacity-[0.06] transition-opacity pointer-events-none">
+        <img
+          src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=400&h=800&fit=crop"
+          alt="decoration"
+          className="w-full h-full object-cover grayscale"
+        />
       </div>
     </Link>
   );
