@@ -5,10 +5,10 @@ import { usePathname } from 'next/navigation';
 import { Home, Search, MessageSquare, User } from 'lucide-react';
 
 const NAV_ITEMS = [
-  { label: 'ホーム',     href: '/',          icon: Home },
-  { label: 'メイト',     href: '/mates',     icon: Search },
-  { label: 'メッセージ', href: '/messages',  icon: MessageSquare },
-  { label: 'マイページ', href: '/mypage',    icon: User },
+  { label: 'ペット', href: '/', icon: Home },
+  { label: 'メイトを探す', href: '/mates', icon: Search },
+  { label: 'メッセージ', href: '/messages', icon: MessageSquare },
+  { label: 'マイページ', href: '/mypage', icon: User },
 ];
 
 export default function BottomNav() {
@@ -25,9 +25,8 @@ export default function BottomNav() {
                 <Link
                   key={href}
                   href={href}
-                  className={`flex flex-col items-center justify-center gap-1 flex-1 h-16 transition-colors ${
-                    isActive ? 'text-orange-600 pointer-events-none' : 'text-gray-400 hover:text-gray-600'
-                  }`}
+                  className={`flex flex-col items-center justify-center gap-1 flex-1 h-16 transition-colors ${isActive ? 'text-orange-600 pointer-events-none' : 'text-gray-400 hover:text-gray-600'
+                    }`}
                 >
                   <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
                   <span className="text-[10px] font-medium">{label}</span>

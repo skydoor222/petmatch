@@ -52,20 +52,6 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* Quick Actions: Deposit Flow */}
-      <div className="max-w-md mx-auto px-6 py-4">
-        <Link href="/deposit" className="group block">
-          <div className="bg-orange-600 text-white px-8 py-5 rounded-[2.2rem] flex items-center justify-between shadow-xl shadow-orange-900/20 active:scale-[0.98] transition-all">
-            <div className="text-left">
-              <div className="text-[10px] font-black uppercase tracking-widest opacity-70 mb-0.5 text-white">Owner Menu</div>
-              <div className="text-lg font-heading">ペットを預ける</div>
-            </div>
-            <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all">
-              <Plus size={20} className="text-white" strokeWidth={3} />
-            </div>
-          </div>
-        </Link>
-      </div>
 
       {/* Categories Horizontal Scroll */}
       <div className="max-w-md mx-auto px-6 py-2 overflow-x-auto no-scrollbar flex gap-3">
