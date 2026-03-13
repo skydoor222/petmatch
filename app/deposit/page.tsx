@@ -19,10 +19,12 @@ export default function DepositPage() {
     const [selectedService, setSelectedService] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
+    const [petInfo, setPetInfo] = useState('');
+    const [petNotes, setPetNotes] = useState('');
 
     const handleNext = () => {
-        if (step < 2) setStep(step + 1);
-        else router.push('/deposit/select-mode');
+        if (step < 3) setStep(step + 1);
+        else router.push('/deposit/matching');
     };
 
     return (
@@ -39,13 +41,15 @@ export default function DepositPage() {
             {/* Progress Bar */}
             <div className="px-8 mb-10">
                 <div className="flex items-center justify-between mb-2">
-                    <span className="text-[10px] font-black text-orange-600 uppercase tracking-widest">Step {step} of 2</span>
-                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{step === 1 ? '内容の選択' : '日時の設定'}</span>
+                    <span className="text-[10px] font-black text-orange-600 uppercase tracking-widest">Step {step} of 3</span>
+                    <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                        {step === 1 ? '内容の選択' : step === 2 ? '日時の設定' : 'ペットの情報'}
+                    </span>
                 </div>
                 <div className="h-1.5 w-full bg-gray-50 rounded-full overflow-hidden">
                     <div
                         className="h-full bg-orange-600 transition-all duration-500 ease-out"
-                        style={{ width: `${(step / 2) * 100}%` }}
+                        style={{ width: `${(step / 3) * 100}%` }}
                     />
                 </div>
             </div>
@@ -80,7 +84,7 @@ export default function DepositPage() {
                             ))}
                         </div>
                     </div>
-                ) : (
+                ) : step === 2 ? (
                     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         <div>
                             <h2 className="text-2xl font-heading text-gray-900 mb-2">いつ預けますか？</h2>
@@ -121,6 +125,39 @@ export default function DepositPage() {
                             </p>
                         </div>
                     </div>
+                ) : step === 3 ? (
+                    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        <div>
+                            <h2 className="text-2xl font-heading text-gray-900 mb-2">預けるペットの情報</h2>
+                            <p className="text-gray-400 text-sm font-medium">お世話に必要な詳細を入力してください</p>
+                        </div>
+
+                        <div className="space-y-6">
+                            <div className="space-y-4">
+                                <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-2">基本情報</label>
+                                <input
+                                    type="text"
+                                    value={petInfo}
+                                    onChange={(e) => setPetInfo(e.target.value)}
+                                    placeholder="例：柴犬・レオ・3歳・男の子"
+                                    className="w-full bg-gray-50 border-none rounded-[1.8rem] py-5 px-8 text-sm font-bold text-gray-900 focus:ring-4 focus:ring-orange-500/5 transition-all outline-none"
+                                />
+                            </div>
+
+                            <div className="space-y-4">
+                                <label className="text-xs font-black text-gray-400 uppercase tracking-widest ml-2">特記事項（任意）</label>
+                                <textarea
+                                    value={petNotes}
+                                    onChange={(e) => setPetNotes(e.target.value)}
+                                    placeholder="アレルギーや持病、性格など"
+                                    rows={4}
+                                    className="w-full bg-gray-50 border-none rounded-[2rem] py-6 px-8 text-sm font-bold text-gray-900 focus:ring-4 focus:ring-orange-500/5 transition-all outline-none resize-none"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div>Invalid Step</div>
                 )}
             </div>
 
@@ -128,14 +165,20 @@ export default function DepositPage() {
             <div className="fixed bottom-10 left-8 right-8 z-40">
                 <button
                     onClick={handleNext}
-                    disabled={step === 1 ? !selectedService : (!date || !time)}
+                    disabled={
+                        step === 1 ? !selectedService :
+                            step === 2 ? (!date || !time) :
+                                !petInfo
+                    }
                     className={`w-full h-20 rounded-[2.2rem] font-bold text-lg flex items-center justify-center gap-3 shadow-2xl transition-all active:scale-95
-                        ${(step === 1 ? selectedService : (date && time))
+                        ${(step === 1 ? selectedService : step === 2 ? (date && time) : petInfo)
                             ? 'bg-orange-600 text-white shadow-orange-900/30'
                             : 'bg-gray-100 text-gray-300 shadow-none cursor-not-allowed'}`}
                 >
-                    <span>{step === 1 ? '次に進む' : 'マッチング方式を選ぶ'}</span>
-                    <ChevronRight size={22} className={step === 1 ? 'translate-x-0' : 'translate-x-1 transition-transform'} />
+                    <span>
+                        {step === 1 ? '次に進む' : step === 2 ? 'ペット情報の入力へ' : '依頼を完了する'}
+                    </span>
+                    <ChevronRight size={22} className={step < 3 ? 'translate-x-0' : 'translate-x-1 transition-transform'} />
                 </button>
             </div>
         </div>

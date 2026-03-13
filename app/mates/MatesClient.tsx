@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import MateCard from '@/components/MateCard';
 import BottomNav from '@/components/BottomNav';
-import { Search, MapPin, SlidersHorizontal, Dog, Cat, Rabbit, Sparkles, X, ChevronDown, Check } from 'lucide-react';
+import { Search, MapPin, SlidersHorizontal, Dog, Cat, Rabbit, Sparkles, X, ChevronDown, Check, User } from 'lucide-react';
+import Link from 'next/link';
 import { Mate, SERVICE_LABELS, ServiceType } from '@/lib/types';
 
 const CATEGORIES = [
@@ -61,8 +62,8 @@ export default function MatesPage({ initialMates }: { initialMates: Mate[] }) {
                             <button
                                 onClick={() => setShowFilters(!showFilters)}
                                 className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${showFilters || selectedServices.length > 0 || selectedArea !== 'すべて'
-                                        ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/20'
-                                        : 'bg-gray-50 text-gray-400 hover:text-orange-600'
+                                    ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/20'
+                                    : 'bg-gray-50 text-gray-400 hover:text-orange-600'
                                     }`}
                             >
                                 <SlidersHorizontal size={18} />
@@ -93,8 +94,8 @@ export default function MatesPage({ initialMates }: { initialMates: Mate[] }) {
                                     key={cat.id}
                                     onClick={() => setSelectedCategory(cat.id)}
                                     className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-2xl border transition-all text-xs font-black uppercase tracking-widest ${isActive
-                                            ? 'bg-orange-600 border-orange-600 text-white shadow-md shadow-orange-900/10'
-                                            : 'bg-gray-50 border-gray-100 text-gray-400 hover:border-orange-200'
+                                        ? 'bg-orange-600 border-orange-600 text-white shadow-md shadow-orange-900/10'
+                                        : 'bg-gray-50 border-gray-100 text-gray-400 hover:border-orange-200'
                                         }`}
                                 >
                                     <Icon size={14} />
@@ -128,8 +129,8 @@ export default function MatesPage({ initialMates }: { initialMates: Mate[] }) {
                                             key={area}
                                             onClick={() => setSelectedArea(area)}
                                             className={`py-3 rounded-2xl text-xs font-bold border transition-all ${selectedArea === area
-                                                    ? 'bg-orange-600 border-orange-600 text-white shadow-lg shadow-orange-900/10'
-                                                    : 'bg-gray-50 border-gray-100 text-gray-600'
+                                                ? 'bg-orange-600 border-orange-600 text-white shadow-lg shadow-orange-900/10'
+                                                : 'bg-gray-50 border-gray-100 text-gray-600'
                                                 }`}
                                         >
                                             {area}
@@ -149,8 +150,8 @@ export default function MatesPage({ initialMates }: { initialMates: Mate[] }) {
                                                 key={service.id}
                                                 onClick={() => toggleService(service.id)}
                                                 className={`px-4 py-3 rounded-2xl text-xs font-bold border transition-all flex items-center gap-2 ${isActive
-                                                        ? 'bg-orange-50 border-orange-200 text-orange-600 shadow-sm'
-                                                        : 'bg-white border-gray-100 text-gray-500'
+                                                    ? 'bg-orange-50 border-orange-200 text-orange-600 shadow-sm'
+                                                    : 'bg-white border-gray-100 text-gray-500'
                                                     }`}
                                             >
                                                 {isActive && <Check size={14} strokeWidth={3} />}
@@ -182,6 +183,43 @@ export default function MatesPage({ initialMates }: { initialMates: Mate[] }) {
                     </div>
                 </div>
             )}
+
+            {/* Request Mode Selection */}
+            <div className="max-w-md mx-auto px-6 pt-8 pb-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <Link
+                        href="/deposit"
+                        className="group bg-orange-600 rounded-[2.5rem] p-6 text-white shadow-xl shadow-orange-900/10 active:scale-[0.98] transition-all relative overflow-hidden"
+                    >
+                        <div className="relative z-10">
+                            <div className="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                                <Sparkles size={22} className="fill-white/20" />
+                            </div>
+                            <div className="text-lg font-heading mb-1 leading-tight">ランダム依頼</div>
+                            <div className="text-[10px] font-black opacity-70 uppercase tracking-widest leading-relaxed">
+                                条件に合うメイトを<br />おまかせで探す
+                            </div>
+                        </div>
+                        {/* Decorative circle */}
+                        <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-white/10 rounded-full blur-2xl" />
+                    </Link>
+
+                    <div
+                        className="bg-white rounded-[2.5rem] p-6 border border-gray-100 shadow-sm relative overflow-hidden flex flex-col justify-end"
+                    >
+                        <div className="w-11 h-11 rounded-2xl bg-gray-50 flex items-center justify-center mb-4 text-orange-600">
+                            <User size={22} />
+                        </div>
+                        <div className="text-lg font-heading text-gray-900 mb-1 leading-tight">指名依頼</div>
+                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-relaxed">
+                            自分にピッタリの人を<br />一覧から選んで予約
+                        </div>
+                        <div className="absolute top-4 right-6">
+                            <div className="text-[9px] font-black text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full border border-orange-100">有料</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {/* Results Section */}
             <div className="max-w-md mx-auto px-6 py-8">
