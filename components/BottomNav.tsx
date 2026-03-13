@@ -25,10 +25,10 @@ export default function BottomNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center gap-1 w-full h-full transition-all duration-300 ${isActive ? 'text-teal-700 pointer-events-none' : 'text-gray-400 hover:text-gray-600'
+                className={`flex flex-col items-center justify-center gap-1 w-full h-full transition-all duration-300 ${isActive ? 'text-orange-700 pointer-events-none' : 'text-gray-400 hover:text-gray-600'
                   }`}
               >
-                <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? 'bg-teal-50 shadow-inner' : ''}`}>
+                <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? 'bg-orange-50 shadow-inner' : ''}`}>
                   <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
                 </div>
                 <span className={`text-[10px] font-bold transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-70'}`}>

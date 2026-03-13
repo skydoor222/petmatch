@@ -16,14 +16,16 @@ export default function PetCard({ pet }: Props) {
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                 ) : (
-                    <div className="flex items-center justify-center h-full text-4xl opacity-20">🐾</div>
+                    <div className="flex items-center justify-center h-full bg-gray-50 text-gray-200">
+                        <MapPin size={48} strokeWidth={1} />
+                    </div>
                 )}
 
                 {/* Status Badge */}
                 {pet.status === 'looking_for_mate' && (
                     <div className="absolute top-3 left-3 glass px-3 py-1.5 rounded-xl shadow-lg border border-white/20 flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-                        <span className="text-[10px] font-black text-teal-900 uppercase tracking-wider">Seeking Care</span>
+                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                        <span className="text-[10px] font-black text-orange-900 uppercase tracking-wider">Seeking Care</span>
                     </div>
                 )}
 
@@ -46,19 +48,18 @@ export default function PetCard({ pet }: Props) {
 
                 <div className="flex items-center justify-between mt-3">
                     <div className="flex items-center gap-1 text-gray-400">
-                        <MapPin size={10} className="text-teal-600" />
+                        <MapPin size={10} className="text-orange-600" />
                         <span className="text-[10px] font-bold truncate max-w-[80px]">{pet.area.split('・')[0]}</span>
                     </div>
 
-                    <div className="flex items-center gap-1.5 bg-gray-50 px-2 py-1 rounded-lg border border-gray-100">
-                        <Sparkles size={10} className="text-amber-500" />
+                    <div className="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-100">
                         <span className="text-[10px] font-black text-gray-900">{pet.age}</span>
                     </div>
                 </div>
             </div>
 
             {/* Price/Marketplace Label (Mercari style) */}
-            <div className="absolute bottom-[88px] left-0 bg-teal-600 text-white text-[11px] font-black px-3 py-1.5 rounded-r-xl shadow-lg shadow-teal-900/10">
+            <div className="absolute bottom-[88px] left-0 bg-orange-600 text-white text-[11px] font-black px-3 py-1.5 rounded-r-xl shadow-lg shadow-orange-900/10">
                 Needs Care
             </div>
         </Link>

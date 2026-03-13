@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getPetById } from '@/lib/supabase';
 import {
     ArrowLeft, MapPin, Heart, Send, CheckCircle2,
-    Sparkles, Calendar, User, PawPrint, MessageSquare
+    Sparkles, Calendar, User, PawPrint, MessageSquare, ShieldCheck
 } from 'lucide-react';
 
 export default async function PetDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -26,21 +26,23 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                         className="w-full h-full object-cover"
                     />
                 ) : (
-                    <div className="flex items-center justify-center h-full text-9xl opacity-30">🐾</div>
+                    <div className="flex items-center justify-center h-full bg-gray-100 text-gray-300">
+                        <MapPin size={120} strokeWidth={1} />
+                    </div>
                 )}
 
                 {/* Floating Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute bottom-10 left-8 right-8 text-white z-10">
-                    <div className="inline-flex items-center gap-2 bg-teal-500/90 backdrop-blur-md px-3 py-1 rounded-full mb-4 border border-teal-400/20">
+                    <div className="inline-flex items-center gap-2 bg-orange-500/90 backdrop-blur-md px-3 py-1 rounded-full mb-4 border border-orange-400/20">
                         <CheckCircle2 size={12} className="text-white" />
                         <span className="text-[10px] font-black uppercase tracking-wider">Active Request</span>
                     </div>
                     <h1 className="text-4xl font-heading mb-2 leading-tight">{pet.name}</h1>
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-1.5 opacity-90">
-                            <MapPin size={14} className="text-teal-400" />
+                            <MapPin size={14} className="text-orange-400" />
                             <span className="text-sm font-bold tracking-wide text-white">{pet.area}</span>
                         </div>
                         <div className="w-1 h-1 rounded-full bg-white/40" />
@@ -74,8 +76,8 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                 {/* Description Section */}
                 <section className="bg-white rounded-[2.5rem] p-8 card-shadow border border-gray-100">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-10 rounded-2xl bg-teal-50 flex items-center justify-center text-teal-600">
-                            <Sparkles size={20} />
+                        <div className="w-10 h-10 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600">
+                            <MessageSquare size={20} />
                         </div>
                         <h2 className="text-lg font-heading text-gray-900 uppercase tracking-wider">Detail</h2>
                     </div>
@@ -87,8 +89,8 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                 {/* Needs Section */}
                 <section className="bg-white rounded-[2.5rem] p-8 card-shadow border border-gray-100">
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="w-10 h-10 rounded-2xl bg-teal-50 flex items-center justify-center text-teal-600">
-                            <PawPrint size={20} />
+                        <div className="w-10 h-10 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600">
+                            <ShieldCheck size={20} />
                         </div>
                         <h2 className="text-lg font-heading text-gray-900 uppercase tracking-wider">Required Care</h2>
                     </div>
@@ -127,13 +129,13 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                     <div className="glass px-6 py-5 rounded-[2.5rem] shadow-2xl flex items-center gap-4 border border-white/50">
                         <div className="flex-1">
                             <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Status</div>
-                            <div className="text-xl font-heading text-teal-600">Looking for Mate</div>
+                            <div className="text-xl font-heading text-orange-600">Looking for Mate</div>
                         </div>
                         <div className="flex items-center gap-3">
                             <button className="w-16 h-16 rounded-[1.8rem] bg-white border border-gray-100 flex items-center justify-center text-gray-300 hover:text-rose-500 hover:border-rose-100 transition-all active:scale-95 shadow-sm">
                                 <Heart size={24} />
                             </button>
-                            <button className="min-w-[140px] h-16 rounded-[1.8rem] bg-teal-600 text-white font-bold flex items-center justify-center gap-3 hover:bg-teal-700 transition-all active:scale-95 shadow-xl shadow-teal-900/20 px-6">
+                            <button className="min-w-[140px] h-16 rounded-[1.8rem] bg-orange-600 text-white font-bold flex items-center justify-center gap-3 hover:bg-orange-700 transition-all active:scale-95 shadow-xl shadow-orange-900/20 px-6">
                                 <Send size={18} />
                                 <span>Offer Care</span>
                             </button>

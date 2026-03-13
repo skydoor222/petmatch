@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #0D9488; /* Jade Emerald */
-  --primary-dark: #0F766E;
-  --secondary: #F7F5F1; /* Sandy Beige */
-  --accent: #F97316; /* Sunset Orange */
+  --primary: #F97316;
+  /* Premium Orange */
+  --primary-dark: #EA580C;
+  --secondary: #FAF9F6;
+  /* Alabaster White */
+  --accent: #FB923C;
   --background: #FFFFFF;
   --foreground: #1C1C1E;
   --card: #FFFFFF;
@@ -19,7 +21,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, .font-heading {
+h1,
+h2,
+h3,
+h4,
+.font-heading {
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -39,8 +45,14 @@ h1, h2, h3, h4, .font-heading {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.hide-scrollbar::-webkit-scrollbar { display: none; }
-.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 .card-shadow {
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
@@ -51,7 +63,7 @@ h1, h2, h3, h4, .font-heading {
 }
 
 .btn-primary {
-  @apply bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold py-3 px-6 rounded-2xl transition-all active:scale-[0.98] shadow-lg shadow-teal-900/10;
+  @apply bg-[#F97316] hover:bg-[#EA580C] text-white font-bold py-3 px-6 rounded-2xl transition-all active:scale-[0.98] shadow-lg shadow-orange-900/10;
 }
 
 .btn-secondary {
