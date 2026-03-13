@@ -87,4 +87,5 @@ export interface Pet {
   description: string;
   area: string;
   status: 'looking_for_mate' | 'booked' | 'none';
+  distance?: string;
 }

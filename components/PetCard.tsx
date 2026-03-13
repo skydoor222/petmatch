@@ -53,7 +53,7 @@ export default function PetCard({ pet }: Props) {
                     </div>
 
                     <div className="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-100">
-                        <span className="text-[10px] font-black text-gray-900">{pet.age}</span>
+                        <span className="text-[10px] font-black text-gray-900">{pet.age}・{pet.distance}</span>
                     </div>
                 </div>
             </div>

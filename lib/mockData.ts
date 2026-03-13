@@ -220,6 +220,7 @@ export const PETS: Pet[] = [
     description: '元気いっぱいの柴犬です！お散歩が大好きで、他のワンちゃんとも仲良くできます。週に2回ほど、日中の散歩代行をお願いできる方を探しています。',
     area: '世田谷区・三軒茶屋',
     status: 'looking_for_mate',
+    distance: '200m以内',
   },
   {
     id: 'p2',
@@ -232,6 +233,7 @@ export const PETS: Pet[] = [
     description: 'おっとりした性格のゴールデンです。人が大好きで、誰にでもしっぽを振ります。平日の夕方にお散歩をお願いしたいです。',
     area: '世田谷区・用賀',
     status: 'looking_for_mate',
+    distance: '500m以内',
   },
   {
     id: 'p3',
@@ -244,6 +246,7 @@ export const PETS: Pet[] = [
     description: '少し人見知りですが、慣れると甘えん坊です。出張中に1日1回のご飯とトイレの掃除をお願いできる方を探しています。',
     area: '渋谷区・恵比寿',
     status: 'looking_for_mate',
+    distance: '1.2km',
   },
   {
     id: 'p4',
@@ -256,6 +259,7 @@ export const PETS: Pet[] = [
     description: '白くてふわふわのウサギです。人にかまってもらうのが大好き。週末の旅行中にお世話をお願いしたいです。',
     area: '目黒区・中目黒',
     status: 'booked',
+    distance: '800m',
   },
   {
     id: 'p5',
@@ -268,6 +272,7 @@ export const PETS: Pet[] = [
     description: 'おしゃれが好きなフレブルです！皮膚が少し弱いので、ケアに慣れている方だと嬉しいです。',
     area: '世田谷区・下北沢',
     status: 'looking_for_mate',
+    distance: '350m',
   },
 ];
 
