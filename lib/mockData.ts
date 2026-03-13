@@ -15,7 +15,7 @@ export const MATES: Mate[] = [
       { type: 'hospital', pricePerHour: 2500 },
       { type: 'night', pricePerHour: 3200 },
     ],
-    tags: ['🐕 犬OK', '🐈 猫OK', '💊 投薬OK', '🌙 深夜OK'],
+    tags: ['犬OK', '猫OK', '投薬OK', '深夜OK'],
     trustScore: {
       score: 87,
       completedCount: 32,
@@ -68,7 +68,7 @@ export const MATES: Mate[] = [
       { type: 'home_care', pricePerHour: 2200 },
       { type: 'night', pricePerHour: 3500 },
     ],
-    tags: ['🐈 猫専門', '💊 投薬OK', '🌙 深夜OK', '🏥 医療ケア経験あり'],
+    tags: ['猫専門', '投薬OK', '深夜OK', '医療ケア経験あり'],
     trustScore: {
       score: 94,
       completedCount: 48,
@@ -112,7 +112,7 @@ export const MATES: Mate[] = [
       { type: 'walk', pricePerHour: 1500 },
       { type: 'home_care', pricePerHour: 1800 },
     ],
-    tags: ['🐕 大型犬OK', '🐕 多頭OK', '🌱 丁寧な対応'],
+    tags: ['大型犬OK', '多頭OK', '丁寧な対応'],
     trustScore: {
       score: 72,
       completedCount: 8,
@@ -149,7 +149,7 @@ export const MATES: Mate[] = [
       { type: 'night', pricePerHour: 4000 },
       { type: 'long_stay', pricePerHour: 2500 },
     ],
-    tags: ['🏅 ペットナース資格', '🐕 介護専門', '💊 医療ケア', '🌙 24時間対応'],
+    tags: ['ペットナース資格', '介護専門', '医療ケア', '24時間対応'],
     trustScore: {
       score: 96,
       completedCount: 67,
@@ -183,7 +183,7 @@ export const MATES: Mate[] = [
       { type: 'home_care', pricePerHour: 2000 },
       { type: 'long_stay', pricePerHour: 1800 },
     ],
-    tags: ['🐇 小動物OK', '🦜 鳥OK', '🦎 爬虫類OK', '🐹 ハムスターOK'],
+    tags: ['小動物OK', '鳥OK', '爬虫類OK', 'ハムスターOK'],
     trustScore: {
       score: 81,
       completedCount: 22,
@@ -272,8 +272,8 @@ export const PETS: Pet[] = [
 ];
 
 export const RELATIONSHIP_TIMELINE = [
-  { emoji: '🐾', text: '田中 美咲さんと12回目の散歩を完了', date: '2026年3月', color: 'bg-emerald-500' },
-  { emoji: '⭐', text: '鈴木 陽介さんへの初めての投薬補助が完了', date: '2026年2月', color: 'bg-amber-500' },
-  { emoji: '📈', text: '田中 美咲さんとの信頼スコアが 80 → 87 に上昇', date: '2025年12月', color: 'bg-blue-500' },
-  { emoji: '🎉', text: '鈴木 陽介さんと初めてマッチング', date: '2025年11月', color: 'bg-purple-500' },
+  { emoji: '', text: '田中 美咲さんと12回目の散歩を完了', date: '2026年3月', color: 'bg-orange-500' },
+  { emoji: '', text: '鈴木 陽介さんへの初めての投薬補助が完了', date: '2026年2月', color: 'bg-orange-600' },
+  { emoji: '', text: '田中 美咲さんとの信頼スコアが 80 → 87 に上昇', date: '2025年12月', color: 'bg-orange-700' },
+  { emoji: '', text: '鈴木 陽介さんと初めてマッチング', date: '2025年11月', color: 'bg-orange-800' },
 ];

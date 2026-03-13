@@ -5,10 +5,10 @@ import BottomNav from '@/components/BottomNav';
 import { Search, MapPin, SlidersHorizontal, Plus, Sparkles, Dog, Cat, Rabbit, Bird } from 'lucide-react';
 
 const CATEGORIES = [
-  { id: 'all', label: 'All', icon: Sparkles },
-  { id: 'dog', label: 'Dogs', icon: Dog },
-  { id: 'cat', label: 'Cats', icon: Cat },
-  { id: 'rabbit', label: 'Small', icon: Rabbit },
+  { id: 'all', label: 'すべて', icon: Sparkles },
+  { id: 'dog', label: 'いぬ', icon: Dog },
+  { id: 'cat', label: 'ねこ', icon: Cat },
+  { id: 'rabbit', label: '小動物', icon: Rabbit },
 ];
 
 export default async function HomePage() {
@@ -29,8 +29,7 @@ export default async function HomePage() {
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-2xl bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-900/20">
-                {/* Sparkles icon removed from logo */}
-                <span role="img" aria-label="paw" className="text-xl">🐾</span>
+                <Dog size={20} />
               </div>
               <h1 className="text-2xl font-heading text-gray-900 tracking-tight">PetMatch</h1>
             </div>
@@ -45,15 +44,28 @@ export default async function HomePage() {
             </div>
             <input
               type="text"
-              placeholder="What kind of pet are you looking for?"
+              placeholder="近所で預け先をお探しですか？"
               className="w-full bg-gray-50 border border-gray-100 rounded-[2rem] pl-14 pr-6 py-4 text-sm font-bold text-gray-900 placeholder:text-gray-300 focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:bg-white transition-all card-shadow"
             />
           </div>
         </div>
       </div>
 
+      {/* Quick Actions: Deposit Flow */}
+      <div className="px-6 py-4">
+        <button className="w-full bg-orange-600 text-white p-6 rounded-[2.5rem] flex items-center justify-between shadow-xl shadow-orange-900/20 active:scale-[0.98] transition-all group">
+          <div className="text-left">
+            <div className="text-[10px] font-black uppercase tracking-widest opacity-70 mb-1 text-white">Owner Menu</div>
+            <div className="text-xl font-heading">ペットを預ける</div>
+          </div>
+          <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <Plus size={24} className="text-white" strokeWidth={3} />
+          </div>
+        </button>
+      </div>
+
       {/* Categories Horizontal Scroll */}
-      <div className="px-6 py-6 overflow-x-auto no-scrollbar flex gap-3">
+      <div className="px-6 py-2 overflow-x-auto no-scrollbar flex gap-3">
         {CATEGORIES.map((cat, i) => {
           const Icon = cat.icon;
           return (
@@ -64,8 +76,7 @@ export default async function HomePage() {
                   ? 'bg-orange-600 border-orange-600 text-white shadow-lg shadow-orange-900/10'
                   : 'bg-white border-gray-100 text-gray-500 hover:border-orange-200 hover:text-orange-600'}`}
             >
-              {Icon && <Icon size={18} />}
-              {!Icon && cat.id === 'all' && <span role="img" aria-label="sparkles" className="text-base">✨</span>} {/* Replaced Sparkles with emoji */}
+              <Icon size={18} />
               <span className="text-xs font-black uppercase tracking-widest">{cat.label}</span>
             </button>
           );
@@ -73,10 +84,10 @@ export default async function HomePage() {
       </div>
 
       {/* Main Grid: Mercari Style */}
-      <div className="px-6">
+      <div className="px-6 mt-6">
         <div className="flex items-center justify-between mb-6 px-2">
-          <h2 className="text-lg font-heading text-gray-900 uppercase tracking-widest">New Requests</h2>
-          <div className="text-[10px] font-black text-orange-600 uppercase tracking-widest border-b border-orange-100 pb-0.5">Explore All</div>
+          <h2 className="text-lg font-heading text-gray-900 uppercase tracking-widest">近所の募集ペット</h2>
+          <div className="text-[10px] font-black text-orange-600 uppercase tracking-widest border-b border-orange-100 pb-0.5 whitespace-nowrap">すべて見る</div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -87,13 +98,10 @@ export default async function HomePage() {
 
         {pets.length === 0 && (
           <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-gray-100 mt-4">
-            {/* Plus icon div removed */}
-            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No active requests</p>
+            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">募集中のペットはいません</p>
           </div>
         )}
       </div>
-
-      {/* Floating Action Button: "Post" style - Removed */}
 
       <BottomNav />
     </div>

@@ -25,7 +25,7 @@ export default function PetCard({ pet }: Props) {
                 {pet.status === 'looking_for_mate' && (
                     <div className="absolute top-3 left-3 glass px-3 py-1.5 rounded-xl shadow-lg border border-white/20 flex items-center gap-1.5">
                         <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-                        <span className="text-[10px] font-black text-orange-900 uppercase tracking-wider">Seeking Care</span>
+                        <span className="text-[10px] font-black text-orange-900 uppercase tracking-wider">お預かり募集中</span>
                     </div>
                 )}
 
@@ -60,7 +60,7 @@ export default function PetCard({ pet }: Props) {
 
             {/* Price/Marketplace Label (Mercari style) */}
             <div className="absolute bottom-[88px] left-0 bg-orange-600 text-white text-[11px] font-black px-3 py-1.5 rounded-r-xl shadow-lg shadow-orange-900/10">
-                Needs Care
+                お世話必要
             </div>
         </Link>
     );

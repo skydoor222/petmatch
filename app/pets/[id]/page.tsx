@@ -37,7 +37,7 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                 <div className="absolute bottom-10 left-8 right-8 text-white z-10">
                     <div className="inline-flex items-center gap-2 bg-orange-500/90 backdrop-blur-md px-3 py-1 rounded-full mb-4 border border-orange-400/20">
                         <CheckCircle2 size={12} className="text-white" />
-                        <span className="text-[10px] font-black uppercase tracking-wider">Active Request</span>
+                        <span className="text-[10px] font-black uppercase tracking-wider">募集中</span>
                     </div>
                     <h1 className="text-4xl font-heading mb-2 leading-tight">{pet.name}</h1>
                     <div className="flex items-center gap-4">
@@ -57,16 +57,18 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
             <div className="px-6 -mt-8 relative z-10">
                 <div className="bg-white rounded-[2.5rem] p-8 card-shadow flex justify-between items-center border border-gray-100">
                     <div className="text-center flex-1 border-r border-gray-50">
-                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Age</div>
+                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">年齢</div>
                         <div className="text-lg font-heading text-gray-900">{pet.age}</div>
                     </div>
                     <div className="text-center flex-1 border-r border-gray-50">
-                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Gender</div>
+                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">性別</div>
                         <div className="text-lg font-heading text-gray-900">{pet.gender === 'male' ? 'オス' : 'メス'}</div>
                     </div>
                     <div className="text-center flex-1">
-                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Category</div>
-                        <div className="text-lg font-heading text-gray-900 capitalize">{pet.category}</div>
+                        <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">種類</div>
+                        <div className="text-lg font-heading text-gray-900 capitalize">
+                            {pet.category === 'dog' ? '犬' : pet.category === 'cat' ? '猫' : 'その他'}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,7 +81,7 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                         <div className="w-10 h-10 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600">
                             <MessageSquare size={20} />
                         </div>
-                        <h2 className="text-lg font-heading text-gray-900 uppercase tracking-wider">Detail</h2>
+                        <h2 className="text-lg font-heading text-gray-900 uppercase tracking-wider">詳細情報</h2>
                     </div>
                     <p className="text-gray-600 leading-relaxed font-medium text-base">
                         {pet.description}
@@ -92,7 +94,7 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                         <div className="w-10 h-10 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600">
                             <ShieldCheck size={20} />
                         </div>
-                        <h2 className="text-lg font-heading text-gray-900 uppercase tracking-wider">Required Care</h2>
+                        <h2 className="text-lg font-heading text-gray-900 uppercase tracking-wider">必要なお世話</h2>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         {['散歩', '食事の補助', 'トイレ掃除', '遊びの相手'].map(care => (
@@ -112,8 +114,8 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                                 <User size={24} />
                             </div>
                             <div>
-                                <div className="text-sm font-black text-gray-900 uppercase tracking-wide">Owner</div>
-                                <div className="text-xs font-bold text-gray-400">Verified Member</div>
+                                <div className="text-sm font-black text-gray-900 uppercase tracking-wide">オーナー</div>
+                                <div className="text-xs font-bold text-gray-400">本人確認済み</div>
                             </div>
                         </div>
                         <button className="w-10 h-10 rounded-xl border border-gray-100 flex items-center justify-center text-gray-300">
