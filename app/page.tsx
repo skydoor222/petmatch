@@ -1,7 +1,7 @@
-export const dynamic = 'force-dynamic';
+import { unstable_noStore as noStore } from 'next/cache';
+import { createClient } from '@/lib/supabase-server';
 import PetCard from '@/components/PetCard';
 import BottomNav from '@/components/BottomNav';
-import { getPets } from '@/lib/supabase';
 import { Search, MapPin, SlidersHorizontal, Plus, Sparkles, Dog, Cat, Rabbit, Bird } from 'lucide-react';
 
 const CATEGORIES = [
@@ -12,7 +12,13 @@ const CATEGORIES = [
 ];
 
 export default async function HomePage() {
-  const pets = await getPets();
+  noStore();
+  const supabase = await createClient();
+  const { data: petsData } = await supabase.from('pets').select('*');
+  const pets = (petsData || []).map((pet: any) => ({
+    ...pet,
+    imageUrl: pet.image_url,
+  }));
 
   return (
     <div className="pb-36 bg-gray-50/50 min-h-screen">
