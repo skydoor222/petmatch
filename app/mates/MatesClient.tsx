@@ -54,9 +54,9 @@ export default function MatesPage({ initialMates }: { initialMates: Mate[] }) {
     return (
         <div className="pb-36 bg-gray-50/50 min-h-screen">
             {/* Search Header */}
-            <div className="bg-white px-6 pt-16 pb-6 sticky top-0 z-40 shadow-sm border-b border-gray-100">
+            <div className="bg-white px-6 pt-12 pb-4 sticky top-0 z-40 shadow-sm border-b border-gray-100">
                 <div className="max-w-md mx-auto">
-                    <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center justify-between mb-6">
                         <h1 className="text-2xl font-heading text-gray-900 tracking-tight">依頼する</h1>
                         <div className="flex items-center gap-2">
                             <button
