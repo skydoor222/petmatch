@@ -39,16 +39,6 @@ export default async function HomePage() {
             </button>
           </div>
 
-          <div className="relative group">
-            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-              <Search size={18} className="text-gray-300 group-focus-within:text-orange-500 transition-colors" />
-            </div>
-            <input
-              type="text"
-              placeholder="近所で預け先をお探しですか？"
-              className="w-full bg-gray-50 border border-gray-100 rounded-[2rem] pl-14 pr-6 py-4 text-sm font-bold text-gray-900 placeholder:text-gray-300 focus:outline-none focus:ring-4 focus:ring-orange-500/5 focus:bg-white transition-all card-shadow"
-            />
-          </div>
         </div>
       </div>
 
