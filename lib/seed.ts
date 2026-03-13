@@ -53,7 +53,7 @@ async function seed() {
             rating: r.rating,
             date: r.date,
             comment: r.comment,
-            repeat_count: r.repeat_count
+            repeat_count: r.repeatCount
         }));
         await supabase.from('reviews').insert(reviewsToInsert);
     }

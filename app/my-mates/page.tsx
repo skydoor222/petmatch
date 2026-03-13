@@ -2,7 +2,7 @@ import Link from 'next/link';
 import BottomNav from '@/components/BottomNav';
 import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
-import { Repeat, Calendar, ChevronRight, History } from 'lucide-react';
+import { Repeat, Calendar, ChevronRight, History, Star, ShieldCheck } from 'lucide-react';
 
 export default async function MyMatesPage() {
   const supabase = await createClient();
