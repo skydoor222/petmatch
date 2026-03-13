@@ -1,50 +1,78 @@
 import Link from 'next/link';
+import { Sparkles, ArrowRight, ShieldCheck, Heart, PawPrint } from 'lucide-react';
 
 export default function WelcomePage() {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-emerald-700 via-emerald-800 to-emerald-900 flex flex-col relative overflow-hidden">
-            {/* Background decoration */}
-            <div className="absolute inset-0 pointer-events-none select-none">
-                <div className="absolute top-[-40px] right-[-30px] text-[220px] opacity-[0.06]">🐾</div>
-                <div className="absolute bottom-[120px] left-[-40px] text-[160px] opacity-[0.05]">🐕</div>
-            </div>
+        <div className="min-h-screen bg-white flex flex-col relative overflow-hidden">
+            {/* Premium Hero Visual */}
+            <div className="relative h-[55vh] overflow-hidden">
+                <img
+                    src="/pets/leo.png"
+                    alt="Happy Pet"
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
 
-            {/* Top hero */}
-            <div className="flex-1 flex flex-col items-center justify-center px-8 text-center pt-20">
-                <div className="text-6xl mb-6">🐾</div>
-                <h1 className="text-3xl font-extrabold text-white leading-tight mb-3">
-                    ペットに、もう一人の<br />相棒を見つけよう。
-                </h1>
-                <p className="text-white/70 text-base leading-relaxed">
-                    信頼できるMateが、あなたの大切な家族を<br />安心してサポートします。
-                </p>
-
-                {/* Feature pills */}
-                <div className="flex flex-wrap gap-2 justify-center mt-8">
-                    {['🐕 犬・猫対応', '💊 投薬OK', '🌙 深夜対応', '🏥 通院同伴'].map(tag => (
-                        <span key={tag} className="bg-white/15 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full backdrop-blur-sm">
-                            {tag}
-                        </span>
-                    ))}
+                {/* Floating Branding */}
+                <div className="absolute top-16 left-8 flex items-center gap-2.5">
+                    <div className="w-10 h-10 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-2xl">
+                        <Sparkles size={20} />
+                    </div>
+                    <span className="text-xl font-heading text-gray-900 tracking-tight">PetMatch</span>
                 </div>
             </div>
 
-            {/* Bottom CTA */}
-            <div className="px-6 pb-12 flex flex-col gap-3">
-                <Link
-                    href="/auth/signup"
-                    className="w-full bg-white text-emerald-800 font-extrabold text-base py-4 rounded-2xl text-center shadow-lg hover:bg-emerald-50 transition-colors active:scale-95"
-                >
-                    無料で始める
-                </Link>
-                <Link
-                    href="/auth/login"
-                    className="w-full bg-white/10 text-white font-bold text-base py-4 rounded-2xl text-center backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-colors active:scale-95"
-                >
-                    ログインはこちら
-                </Link>
-                <p className="text-white/40 text-xs text-center mt-2">
-                    登録することで利用規約・プライバシーポリシーに同意したことになります
+            {/* Content Body */}
+            <div className="flex-1 flex flex-col px-8 -mt-20 relative z-10">
+                <div className="bg-white rounded-[3rem] p-10 shadow-2xl shadow-teal-900/10 border border-gray-50">
+                    <div className="inline-flex items-center gap-2 bg-teal-50 px-3 py-1 rounded-full mb-6">
+                        <ShieldCheck size={12} className="text-teal-600" />
+                        <span className="text-[10px] font-black text-teal-800 uppercase tracking-widest">Verified Marketplace</span>
+                    </div>
+
+                    <h1 className="text-4xl font-heading text-gray-900 leading-[1.1] mb-6">
+                        Find the perfect <br />
+                        <span className="text-teal-600">Mate</span> for your family.
+                    </h1>
+
+                    <p className="text-gray-500 text-sm font-medium leading-relaxed mb-8">
+                        プロのサポーターが、あなたの大切な家族を<br />
+                        最高のおもてなしで支えます。
+                    </p>
+
+                    {/* Feature Chips */}
+                    <div className="flex flex-wrap gap-2 mb-10">
+                        {[
+                            { icon: PawPrint, label: 'Dogs & Cats' },
+                            { icon: Heart, label: 'Expert Care' },
+                        ].map((f, i) => (
+                            <div key={i} className="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-xl border border-gray-100">
+                                <f.icon size={14} className="text-teal-600" />
+                                <span className="text-[11px] font-black text-gray-900 uppercase tracking-tight">{f.label}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="flex flex-col gap-4">
+                        <Link
+                            href="/auth/signup"
+                            className="group w-full bg-teal-600 text-white font-black text-base py-5 rounded-[2rem] flex items-center justify-center gap-3 shadow-xl shadow-teal-900/30 hover:bg-teal-700 transition-all active:scale-95"
+                        >
+                            <span>Get Started Now</span>
+                            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+
+                        <Link
+                            href="/auth/login"
+                            className="w-full bg-gray-50 text-gray-400 font-bold text-sm py-5 rounded-[2rem] text-center border border-gray-100 hover:bg-gray-100 transition-all active:scale-95"
+                        >
+                            Already have an account? <span className="text-teal-600 ml-1">Log in</span>
+                        </Link>
+                    </div>
+                </div>
+
+                <p className="text-gray-300 text-[10px] text-center mt-10 pb-8 uppercase tracking-[0.2em] font-black">
+                    Trusted by 10,000+ Happy Pets
                 </p>
             </div>
         </div>
