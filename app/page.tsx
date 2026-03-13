@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase-server';
 import PetCard from '@/components/PetCard';
 import BottomNav from '@/components/BottomNav';
 import { Search, MapPin, SlidersHorizontal, Plus, Sparkles, Dog, Cat, Rabbit, Bird } from 'lucide-react';
+import Link from 'next/link';
 
 const CATEGORIES = [
   { id: 'all', label: 'すべて', icon: Sparkles },
@@ -53,15 +54,17 @@ export default async function HomePage() {
 
       {/* Quick Actions: Deposit Flow */}
       <div className="px-6 py-4">
-        <button className="w-full bg-orange-600 text-white p-6 rounded-[2.5rem] flex items-center justify-between shadow-xl shadow-orange-900/20 active:scale-[0.98] transition-all group">
-          <div className="text-left">
-            <div className="text-[10px] font-black uppercase tracking-widest opacity-70 mb-1 text-white">Owner Menu</div>
-            <div className="text-xl font-heading">ペットを預ける</div>
+        <Link href="/deposit" className="group block">
+          <div className="bg-orange-600 text-white px-8 py-5 rounded-[2.2rem] flex items-center justify-between shadow-xl shadow-orange-900/20 active:scale-[0.98] transition-all">
+            <div className="text-left">
+              <div className="text-[10px] font-black uppercase tracking-widest opacity-70 mb-0.5 text-white">Owner Menu</div>
+              <div className="text-lg font-heading">ペットを預ける</div>
+            </div>
+            <div className="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all">
+              <Plus size={20} className="text-white" strokeWidth={3} />
+            </div>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-            <Plus size={24} className="text-white" strokeWidth={3} />
-          </div>
-        </button>
+        </Link>
       </div>
 
       {/* Categories Horizontal Scroll */}

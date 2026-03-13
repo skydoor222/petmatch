@@ -88,4 +88,23 @@ export interface Pet {
   area: string;
   status: 'looking_for_mate' | 'booked' | 'none';
   distance?: string;
+  trustScore?: TrustScore;
+}
+
+export type BookingStatus = 'pending' | 'matching' | 'confirmed' | 'completed' | 'cancelled';
+export type MatchingMode = 'ai' | 'premium';
+
+export interface Booking {
+  id: string;
+  ownerId: string;
+  petId: string;
+  mateId?: string;
+  serviceType: ServiceType;
+  status: BookingStatus;
+  mode: MatchingMode;
+  date: string;
+  startTime: string;
+  endTime: string;
+  totalPrice?: number;
+  createdAt: string;
 }

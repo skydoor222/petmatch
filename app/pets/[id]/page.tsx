@@ -35,9 +35,9 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute bottom-10 left-8 right-8 text-white z-10">
-                    <div className="inline-flex items-center gap-2 bg-orange-500/90 backdrop-blur-md px-3 py-1 rounded-full mb-4 border border-orange-400/20">
-                        <CheckCircle2 size={12} className="text-white" />
-                        <span className="text-[10px] font-black uppercase tracking-wider">募集中</span>
+                    <div className="inline-flex items-center gap-2 bg-orange-600 px-3 py-1.5 rounded-full mb-4 border border-white/20 shadow-xl shadow-orange-900/40">
+                        <Sparkles size={12} className="text-white fill-white" />
+                        <span className="text-[10px] font-black uppercase tracking-wider">お迎え待ち</span>
                     </div>
                     <h1 className="text-4xl font-heading mb-2 leading-tight">{pet.name}</h1>
                     <div className="flex items-center gap-4">
@@ -99,7 +99,7 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                     <div className="grid grid-cols-2 gap-4">
                         {['散歩', '食事の補助', 'トイレ掃除', '遊びの相手'].map(care => (
                             <div key={care} className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-50">
-                                <CheckCircle2 size={16} className="text-teal-500" />
+                                <CheckCircle2 size={16} className="text-emerald-500" />
                                 <span className="text-xs font-black text-gray-900">{care}</span>
                             </div>
                         ))}
@@ -131,15 +131,15 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                     <div className="glass px-6 py-5 rounded-[2.5rem] shadow-2xl flex items-center gap-4 border border-white/50">
                         <div className="flex-1">
                             <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">ステータス</div>
-                            <div className="text-xl font-heading text-orange-600">お預かり募集中</div>
+                            <div className="text-xl font-heading text-orange-600">預かり先募集中</div>
                         </div>
                         <div className="flex items-center gap-3">
                             <button className="w-16 h-16 rounded-[1.8rem] bg-white border border-gray-100 flex items-center justify-center text-gray-300 hover:text-rose-500 hover:border-rose-100 transition-all active:scale-95 shadow-sm">
                                 <Heart size={24} />
                             </button>
                             <button className="min-w-[140px] h-16 rounded-[1.8rem] bg-orange-600 text-white font-bold flex items-center justify-center gap-3 hover:bg-orange-700 transition-all active:scale-95 shadow-xl shadow-orange-900/20 px-6">
-                                <Send size={18} />
-                                <span>会ってみたい</span>
+                                <MessageSquare size={18} fill="currentColor" />
+                                <span>お預かりします！</span>
                             </button>
                         </div>
                     </div>
