@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     // Public routes that do NOT require login
-    const publicRoutes = ['/welcome', '/auth/login', '/auth/signup', '/auth/reset'];
+    const publicRoutes = ['/welcome', '/auth/login', '/auth/signup', '/auth/reset', '/auth/update-password'];
     const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route));
 
     // Redirect logged-out users to /welcome (except for public routes)
