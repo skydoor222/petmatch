@@ -10,6 +10,7 @@ const SERVICES = [
     { id: 'home_care', label: '在宅ケア', price: '¥1,800〜' },
     { id: 'hospital', label: '通院同伴', price: '¥2,500〜' },
     { id: 'night', label: '夜間見守り', price: '¥3,200〜' },
+    { id: 'long_stay', label: '長期お泊まり', price: '¥5,000〜' },
 ];
 
 export default function DepositPage() {

@@ -2,64 +2,48 @@ import Link from 'next/link';
 import MateCard from '@/components/MateCard';
 import BottomNav from '@/components/BottomNav';
 import { getMates } from '@/lib/supabase';
-import { Search, MapPin, SlidersHorizontal, ArrowLeft } from 'lucide-react';
+import { Search, MapPin } from 'lucide-react';
 
-export default async function MatesPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
-  const { service } = await searchParams;
+export default async function MatesPage() {
   const mates = await getMates();
 
   return (
-    <div className="pb-32 bg-gray-50/50 min-h-screen">
+    <div className="pb-28 bg-gray-50 min-h-screen">
       {/* Header */}
-      <div className="bg-white border-b border-gray-100 px-6 pt-16 pb-8 sticky top-0 z-30">
-        <div className="max-w-md mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <Link href="/" className="w-10 h-10 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-900 transition-all hover:bg-gray-100">
-              <ArrowLeft size={20} strokeWidth={2.5} />
-            </Link>
-            <h1 className="text-xl font-heading text-gray-900">Explore Mates</h1>
-            <button className="w-10 h-10 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-900 transition-all hover:bg-gray-100">
-              <SlidersHorizontal size={18} />
-            </button>
+      <div className="bg-white border-b border-gray-100 px-5 pt-14 pb-4 sticky top-0 z-30">
+        <h1 className="text-xl font-bold text-gray-900 mb-4">Mateを探す</h1>
+        <div className="flex gap-2">
+          <div className="flex-1 relative">
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" />
+            <input
+              type="text"
+              placeholder="名前・サービスで絞り込む"
+              className="w-full bg-gray-50 border border-gray-100 rounded-xl pl-10 pr-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+            />
           </div>
-
-          <div className="flex gap-4">
-            <div className="flex-1 bg-gray-50 rounded-2xl px-5 py-3.5 flex items-center gap-3 border border-gray-100">
-              <Search size={18} className="text-gray-400" />
-              <input
-                type="text"
-                placeholder="Find a professional..."
-                className="bg-transparent border-none outline-none text-sm font-bold text-gray-900 placeholder:text-gray-300 w-full"
-                defaultValue={service || ''}
-              />
-            </div>
-            <div className="bg-teal-50 rounded-2xl px-5 py-3.5 flex items-center gap-3 border border-teal-100/50">
-              <MapPin size={18} className="text-teal-600" />
-              <span className="text-sm font-bold text-teal-800">世田谷区</span>
-            </div>
+          <div className="bg-orange-50 rounded-xl px-4 py-3 flex items-center gap-1.5 border border-orange-100 shrink-0">
+            <MapPin size={14} className="text-orange-500" />
+            <span className="text-sm font-medium text-orange-700">世田谷区</span>
           </div>
         </div>
       </div>
 
       {/* Results */}
-      <div className="px-6 pt-8">
-        <div className="flex items-center justify-between px-2 mb-6">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-black text-gray-900">{mates.length}</span>
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Professionals Found</span>
-          </div>
-          <div className="text-[10px] font-black text-teal-600 uppercase tracking-widest">Popular first</div>
+      <div className="px-5 pt-5">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm text-gray-500">{mates.length}人のMateが見つかりました</span>
+          <span className="text-xs text-gray-400">人気順</span>
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
+        <div className="flex flex-col gap-4">
           {mates.map((mate: any) => (
             <MateCard key={mate.id} mate={mate} />
           ))}
         </div>
 
         {mates.length === 0 && (
-          <div className="text-center py-32 bg-white rounded-[2.5rem] border border-dashed border-gray-100 shadow-sm">
-            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No Mates Found in this area</p>
+          <div className="text-center py-16 text-sm text-gray-400">
+            このエリアにMateが見つかりませんでした
           </div>
         )}
       </div>

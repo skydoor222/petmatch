@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { ChevronLeft, Search, SlidersHorizontal, MapPin, Star, ShieldCheck, ArrowRight, Heart } from 'lucide-react';
 import { MATES } from '@/lib/mockData';
 
+const DISTANCES = ['150m以内', '200m以内', '350m以内', '500m以内', '800m以内'];
+
 export default function SelectMatePage() {
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
@@ -43,11 +45,11 @@ export default function SelectMatePage() {
             {/* Mate List */}
             <div className="px-6 py-8 max-w-md mx-auto space-y-6">
                 <div className="flex items-center justify-between px-2">
-                    <h2 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">お近くのメイト - 5名見つかりました</h2>
+                    <h2 className="text-[10px] font-semibold text-gray-400">お近くのメイト · {MATES.length}名</h2>
                 </div>
 
                 <div className="grid gap-6">
-                    {MATES.map((mate) => (
+                    {MATES.map((mate, idx) => (
                         <div
                             key={mate.id}
                             onClick={() => router.push(`/deposit/success?mode=premium&mateId=${mate.id}`)}
@@ -55,9 +57,9 @@ export default function SelectMatePage() {
                         >
                             {/* Proximity/Tag Badge */}
                             <div className="flex items-center gap-2 mb-6">
-                                <div className="px-3 py-1 bg-orange-50 text-[10px] font-black text-orange-600 rounded-full border border-orange-100 flex items-center gap-1.5">
+                                <div className="px-3 py-1 bg-orange-50 text-[10px] font-semibold text-orange-600 rounded-full border border-orange-100 flex items-center gap-1.5">
                                     <MapPin size={10} />
-                                    <span>200m以内</span>
+                                    <span>{DISTANCES[idx % DISTANCES.length]}</span>
                                 </div>
                                 {mate.isNew && (
                                     <div className="px-3 py-1 bg-blue-50 text-[10px] font-black text-blue-600 rounded-full border border-blue-100">
@@ -99,8 +101,8 @@ export default function SelectMatePage() {
                             </div>
 
                             <div className="mt-6 pt-6 border-t border-gray-50 flex items-center justify-between">
-                                <div className="text-sm font-black text-gray-900">
-                                    ¥{mate.services[0].pricePerHour} <span className="text-[10px] text-gray-400">/ hour</span>
+                                <div className="text-sm font-bold text-gray-900">
+                                    ¥{mate.services[0].pricePerHour.toLocaleString()} <span className="text-[10px] text-gray-400">/ 時間</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-orange-600 text-[11px] font-black uppercase tracking-widest group-hover:gap-3 transition-all">
                                     <span>指名する</span>

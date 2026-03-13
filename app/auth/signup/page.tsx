@@ -10,7 +10,7 @@ export default function SignUpPage() {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (loading) return; // Prevent double submission
+        if (loading) return;
         setLoading(true);
         setError('');
 
@@ -32,7 +32,6 @@ export default function SignUpPage() {
         try {
             const result = await signUp(formData);
             if (result?.error) {
-                // Translate common Supabase errors to Japanese
                 const msg = result.error;
                 if (msg.includes('security purposes') || msg.includes('3 seconds')) {
                     setError('少し時間をおいてから再度お試しください（3秒以上）');
@@ -53,19 +52,16 @@ export default function SignUpPage() {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             {/* Header */}
-            <div className="bg-gradient-to-br from-emerald-700 to-emerald-900 px-5 pt-14 pb-8 text-center">
-                <div className="text-4xl mb-3">🐾</div>
-                <h1 className="text-2xl font-extrabold text-white">はじめまして！</h1>
-                <p className="text-white/70 text-sm mt-1">アカウントを作成して始めましょう</p>
+            <div className="bg-orange-600 px-5 pt-14 pb-8 text-center">
+                <h1 className="text-2xl font-bold text-white">アカウント作成</h1>
+                <p className="text-white/70 text-sm mt-1">メールアドレスで登録できます</p>
             </div>
 
             {/* Step indicator */}
             <div className="flex items-center justify-center gap-2 py-4">
-                <div className="w-8 h-8 rounded-full bg-emerald-700 flex items-center justify-center text-white text-xs font-bold">1</div>
+                <div className="w-8 h-8 rounded-full bg-orange-600 flex items-center justify-center text-white text-xs font-bold">1</div>
                 <div className="h-0.5 w-10 bg-gray-200" />
                 <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-xs font-bold">2</div>
-                <div className="h-0.5 w-10 bg-gray-200" />
-                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-400 text-xs font-bold">3</div>
             </div>
 
             {/* Form */}
@@ -78,51 +74,51 @@ export default function SignUpPage() {
                     )}
 
                     <div>
-                        <label className="block text-xs font-bold text-gray-500 mb-1.5">メールアドレス</label>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">メールアドレス</label>
                         <input
                             name="email"
                             type="email"
                             required
                             placeholder="you@example.com"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-gray-500 mb-1.5">パスワード <span className="text-gray-300 font-normal">（8文字以上）</span></label>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">パスワード <span className="text-gray-300 font-normal">（8文字以上）</span></label>
                         <input
                             name="password"
                             type="password"
                             required
                             placeholder="••••••••"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-xs font-bold text-gray-500 mb-1.5">パスワード（確認）</label>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">パスワード（確認）</label>
                         <input
                             name="confirm"
                             type="password"
                             required
                             placeholder="••••••••"
-                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent"
+                            className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
                         />
                     </div>
 
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-emerald-700 hover:bg-emerald-800 disabled:opacity-60 text-white font-extrabold py-4 rounded-2xl text-base transition-colors mt-2"
+                        className="w-full bg-orange-600 hover:bg-orange-700 disabled:opacity-60 text-white font-bold py-4 rounded-2xl text-base transition-colors mt-2"
                     >
-                        {loading ? '登録中...' : '次へ →'}
+                        {loading ? '登録中...' : '次へ'}
                     </button>
                 </form>
 
                 <div className="text-center mt-6 pb-8">
                     <p className="text-sm text-gray-500">
                         すでにアカウントお持ちの方は{' '}
-                        <Link href="/auth/login" className="text-emerald-600 font-bold">ログイン</Link>
+                        <Link href="/auth/login" className="text-orange-600 font-semibold">ログイン</Link>
                     </p>
                 </div>
             </div>

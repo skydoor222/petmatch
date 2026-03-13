@@ -2,43 +2,41 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, MessageSquare, Repeat, User } from 'lucide-react';
+import { Home, Search, MessageSquare, User } from 'lucide-react';
+
+const NAV_ITEMS = [
+  { label: 'ホーム',     href: '/',          icon: Home },
+  { label: 'メイト',     href: '/mates',     icon: Search },
+  { label: 'メッセージ', href: '/messages',  icon: MessageSquare },
+  { label: 'マイページ', href: '/mypage',    icon: User },
+];
 
 export default function BottomNav() {
   const pathname = usePathname();
 
-  const navItems = [
-    { label: '探す', href: '/', icon: Home },
-    { label: 'メッセージ', href: '/messages', icon: MessageSquare },
-    { label: 'マイMate', href: '/my-mates', icon: Repeat },
-    { label: 'マイページ', href: '/mypage', icon: User },
-  ];
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-6 pt-2 pointer-events-none">
-      <nav className="max-w-md mx-auto glass rounded-[2rem] shadow-2xl overflow-hidden pointer-events-auto border border-white/50">
-        <div className="flex justify-around items-center h-16 px-2">
-          {navItems.map((item) => {
-            const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex flex-col items-center justify-center gap-1 w-full h-full transition-all duration-300 ${isActive ? 'text-orange-700 pointer-events-none' : 'text-gray-400 hover:text-gray-600'
+    <div className="fixed bottom-0 left-0 right-0 z-50">
+      <div className="max-w-lg mx-auto">
+        <nav className="bg-white border-t border-gray-100">
+          <div className="flex">
+            {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
+              const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`flex flex-col items-center justify-center gap-1 flex-1 h-16 transition-colors ${
+                    isActive ? 'text-orange-600 pointer-events-none' : 'text-gray-400 hover:text-gray-600'
                   }`}
-              >
-                <div className={`p-1.5 rounded-xl transition-all duration-300 ${isActive ? 'bg-orange-50 shadow-inner' : ''}`}>
+                >
                   <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
-                </div>
-                <span className={`text-[10px] font-bold transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-70'}`}>
-                  {item.label}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+                  <span className="text-[10px] font-medium">{label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
