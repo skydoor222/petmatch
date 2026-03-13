@@ -2,75 +2,87 @@ import Link from 'next/link';
 import MateCard from '@/components/MateCard';
 import BottomNav from '@/components/BottomNav';
 import { getMates } from '@/lib/supabase';
+import { Search, MapPin, Calendar, PawPrint, Sparkles, User } from 'lucide-react';
 
 const SERVICES = [
-  { type: 'walk', label: '🐕 散歩代行' },
-  { type: 'hospital', label: '🏥 通院同伴' },
-  { type: 'home_care', label: '🏠 在宅ケア' },
-  { type: 'night', label: '🌙 夜間見守り' },
-  { type: 'long_stay', label: '✈️ 長期不在' },
+  { type: 'walk', label: '散歩', icon: PawPrint },
+  { type: 'hospital', label: '通院', icon: Search },
+  { type: 'home_care', label: 'ケア', icon: Sparkles },
+  { type: 'night', label: '夜間', icon: Calendar },
 ];
 
 export default async function Home() {
   const mates = await getMates();
 
   return (
-    <div className="pb-28">
-      {/* Hero Search */}
-      <div className="bg-gradient-to-br from-emerald-700 to-emerald-900 px-5 pt-12 pb-8 relative overflow-hidden">
-        <div className="absolute right-0 top-0 text-[140px] opacity-[0.07] select-none pointer-events-none leading-none">🐾</div>
-        <div className="text-white text-2xl font-extrabold leading-snug mb-1.5">
-          ペットに、もう一人の<br />相棒を見つけよう。
-        </div>
-        <p className="text-white/70 text-sm mb-5">
-          信頼できるMateが、あなたの大切な家族を支えます
-        </p>
-        {/* Search Box */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
-            <span className="text-base">📍</span>
-            <div>
-              <div className="text-[10px] font-bold text-gray-400">エリア</div>
-              <div className="text-sm font-medium text-gray-800">世田谷区</div>
+    <div className="pb-32 bg-gray-50/50">
+      {/* Hero Section */}
+      <div className="relative pt-16 pb-24 px-6 premium-gradient overflow-hidden">
+        {/* Abstract Background Shapes */}
+        <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 w-64 h-64 bg-teal-400/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl" />
+
+        <div className="relative z-10 max-w-md mx-auto">
+          <header className="flex justify-between items-center mb-8">
+            <div className="text-white font-extrabold text-xl tracking-tight">PetMatch</div>
+            <div className="w-10 h-10 rounded-full glass flex items-center justify-center text-white">
+              <User size={20} />
             </div>
-          </div>
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
-            <span className="text-base">🐾</span>
-            <div>
-              <div className="text-[10px] font-bold text-gray-400">サービス</div>
-              <div className="text-sm text-gray-400">すべてのサービス</div>
+          </header>
+
+          <h1 className="text-white text-3xl md:text-4xl font-extrabold leading-[1.15] mb-4">
+            大切な家族に、<br />もう一人の相棒を。
+          </h1>
+          <p className="text-teal-50 text-base font-medium opacity-90 mb-8 max-w-[280px]">
+            プロフェッショナルなMateが、あなたとペットを支えます。
+          </p>
+
+          {/* Search Bar - Modern Integrated look */}
+          <div className="bg-white/95 backdrop-blur-xl rounded-[2.5rem] shadow-2xl p-2 flex items-center border border-white/40">
+            <div className="flex-1 flex items-center gap-3 pl-4 border-r border-gray-100 py-2">
+              <MapPin size={18} className="text-teal-600" />
+              <div className="text-left">
+                <div className="text-[10px] uppercase tracking-wider font-bold text-gray-400">Area</div>
+                <div className="text-sm font-bold text-gray-900">世田谷区</div>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
-            <span className="text-base">📅</span>
-            <div>
-              <div className="text-[10px] font-bold text-gray-400">日付</div>
-              <div className="text-sm text-gray-400">いつでも</div>
+            <div className="px-3">
+              <Link href="/mates" className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-teal-900/20 hover:bg-teal-700 transition-all active:scale-95">
+                <Search size={22} />
+              </Link>
             </div>
-          </div>
-          <div className="p-3">
-            <Link href="/mates" className="block w-full bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-bold text-center py-3 rounded-xl transition-colors">
-              🔍 Mateを探す
-            </Link>
           </div>
         </div>
       </div>
 
-      {/* Service Chips */}
-      <div className="flex gap-2 overflow-x-auto hide-scrollbar px-4 py-4">
-        {SERVICES.map(s => (
-          <Link key={s.type} href={`/mates?service=${s.type}`}
-            className="flex-shrink-0 bg-white border border-gray-200 text-gray-600 text-xs font-semibold px-3.5 py-2 rounded-full hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-700 transition-colors">
-            {s.label}
-          </Link>
-        ))}
-      </div>
+      {/* Content Area */}
+      <div className="relative -mt-10 px-6">
+        {/* Service Chips */}
+        <div className="flex gap-3 overflow-x-auto hide-scrollbar mb-8 py-2">
+          {SERVICES.map(s => {
+            const Icon = s.icon;
+            return (
+              <Link key={s.type} href={`/mates?service=${s.type}`}
+                className="flex-shrink-0 bg-white border border-gray-100 flex items-center gap-2.5 px-5 py-3 rounded-2xl shadow-sm hover:shadow-md hover:border-teal-100 transition-all active:scale-95">
+                <div className="w-8 h-8 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600">
+                  <Icon size={18} />
+                </div>
+                <span className="text-sm font-bold text-gray-700 whitespace-nowrap">{s.label}</span>
+              </Link>
+            );
+          })}
+        </div>
 
-      {/* Mate List */}
-      <div className="px-4">
-        <h2 className="text-lg font-bold text-gray-900 mb-3">近くのMate</h2>
-        <div className="flex flex-col gap-3.5">
-          {mates.map((mate: any) => <MateCard key={mate.id} mate={mate} />)}
+        {/* List Section */}
+        <div className="flex flex-col gap-6">
+          <div className="flex justify-between items-end px-1">
+            <h2 className="text-xl font-bold text-gray-900">近くのMate</h2>
+            <Link href="/mates" className="text-sm font-bold text-teal-600 hover:text-teal-700">すべて見る</Link>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5">
+            {mates.map((mate: any) => <MateCard key={mate.id} mate={mate} />)}
+          </div>
         </div>
       </div>
 
