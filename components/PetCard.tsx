@@ -2,13 +2,13 @@
 
 import Link from 'next/link';
 import { Pet } from '@/lib/types';
-import { MapPin, Heart, Sparkles } from 'lucide-react';
+import { MapPin, Heart, Clock } from 'lucide-react';
 
 interface Props { pet: Pet; }
 
 export default function PetCard({ pet }: Props) {
     return (
-        <Link href={`/pets/${pet.id}`} className="group relative block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 border border-gray-100/50">
+        <Link href={`/pets/${pet.id}`} className="group relative block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1 border border-gray-100/50 text-left">
             {/* Image Area */}
             <div className="relative aspect-square overflow-hidden bg-gray-100">
                 {pet.imageUrl ? (
@@ -23,51 +23,39 @@ export default function PetCard({ pet }: Props) {
                     </div>
                 )}
 
-                {/* Status Badge */}
-                {pet.status === 'looking_for_mate' && (
-                    <div className="absolute top-3 left-3 glass px-3 py-1.5 rounded-xl shadow-lg border border-white/20 flex items-center gap-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-                        <span className="text-[10px] font-black text-orange-900 uppercase tracking-wider">預かり先募集中</span>
-                    </div>
-                )}
-
                 {/* Wishlist Icon */}
                 <div className="absolute top-3 right-3 w-8 h-8 glass rounded-xl flex items-center justify-center text-gray-900 shadow-lg border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <Heart size={14} className="group-hover:text-rose-500 transition-colors" />
                 </div>
-
-                {/* Service Badge (Bottom Left overlay) - Mercari Style */}
-                <div className="absolute bottom-3 left-0 bg-orange-600 text-white text-[9px] font-black px-3 py-1.5 rounded-r-xl shadow-xl shadow-orange-900/40 backdrop-blur-sm">
-                    お迎え待ち
-                </div>
             </div>
 
             {/* Info Area */}
-            <div className="p-4 pt-3">
-                <div className="flex justify-between items-start mb-0.5">
+            <div className="p-4 pt-4">
+                <div className="flex justify-between items-start mb-2">
                     <h3 className="text-sm font-black text-gray-900 truncate pr-2">
                         {pet.name}
                     </h3>
-                    <div className="px-2 py-0.5 bg-gray-50 rounded-lg border border-gray-100">
-                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-tight">{pet.breed}</span>
+                    <div className="px-2 py-0.5 bg-gray-50 rounded-lg border border-gray-100 shrink-0">
+                        <span className="text-[9px] font-black text-gray-400 uppercase tracking-tight">{pet.breed}</span>
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-3">
+                {/* Specific Request Time - Replaces Hourly Rate */}
+                <div className="flex items-center gap-1.5 py-1.5 px-3 bg-orange-50 rounded-xl border border-orange-100/50 mb-3">
+                    <Clock size={12} className="text-orange-600" />
+                    <span className="text-[11px] font-black text-orange-900">
+                        {pet.requestDate || '12/24'} {pet.requestTime || '14:00〜'}
+                    </span>
+                </div>
+
+                <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1 text-gray-400">
-                        <MapPin size={10} className="text-orange-600" />
-                        <span className="text-[10px] font-bold truncate max-w-[80px]">{pet.area?.split('・')[0] || '世田谷区'}</span>
+                        <MapPin size={10} className="text-orange-600 font-bold" />
+                        <span className="text-[10px] font-black truncate max-w-[80px]">{pet.area?.split('・')[0] || '世田谷区'}</span>
                     </div>
-                    <div className="text-xs font-black text-gray-900">
-                        ¥1,500<span className="text-[10px] text-gray-300">/hr</span>
+                    <div className="text-[9px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                        <span>{pet.distance || '2.0km'}</span>
                     </div>
-                </div>
-
-                {/* Detailed distance/age */}
-                <div className="mt-2 text-[9px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
-                    <span>{pet.age}</span>
-                    <div className="w-1 h-1 rounded-full bg-gray-100" />
-                    <span>{pet.distance || '2.0km'}</span>
                 </div>
             </div>
         </Link>

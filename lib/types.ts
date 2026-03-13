@@ -89,6 +89,8 @@ export interface Pet {
   status: 'looking_for_mate' | 'booked' | 'none';
   distance?: string;
   trustScore?: TrustScore;
+  requestDate?: string; // e.g., "12/24"
+  requestTime?: string; // e.g., "14:00〜"
 }
 
 export type BookingStatus = 'pending' | 'matching' | 'confirmed' | 'completed' | 'cancelled';
