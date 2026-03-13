@@ -130,8 +130,8 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                 <div className="max-w-md mx-auto pointer-events-auto">
                     <div className="glass px-6 py-5 rounded-[2.5rem] shadow-2xl flex items-center gap-4 border border-white/50">
                         <div className="flex-1">
-                            <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Status</div>
-                            <div className="text-xl font-heading text-orange-600">Looking for Mate</div>
+                            <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">ステータス</div>
+                            <div className="text-xl font-heading text-orange-600">お預かり募集中</div>
                         </div>
                         <div className="flex items-center gap-3">
                             <button className="w-16 h-16 rounded-[1.8rem] bg-white border border-gray-100 flex items-center justify-center text-gray-300 hover:text-rose-500 hover:border-rose-100 transition-all active:scale-95 shadow-sm">
@@ -139,7 +139,7 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                             </button>
                             <button className="min-w-[140px] h-16 rounded-[1.8rem] bg-orange-600 text-white font-bold flex items-center justify-center gap-3 hover:bg-orange-700 transition-all active:scale-95 shadow-xl shadow-orange-900/20 px-6">
                                 <Send size={18} />
-                                <span>Offer Care</span>
+                                <span>会ってみたい</span>
                             </button>
                         </div>
                     </div>
