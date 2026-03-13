@@ -5,6 +5,7 @@ CREATE TABLE mates (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   name TEXT NOT NULL,
   emoji TEXT NOT NULL,
+  image_url TEXT,
   bg_gradient TEXT NOT NULL,
   area TEXT NOT NULL,
   city TEXT NOT NULL,

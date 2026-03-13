@@ -51,6 +51,7 @@ export interface Mate {
   id: string;
   name: string;
   emoji: string;
+  imageUrl?: string;
   bgGradient: string;
   area: string;
   city: string;

@@ -16,6 +16,7 @@ async function seed() {
             .insert({
                 name: mate.name,
                 emoji: mate.emoji,
+                image_url: mate.imageUrl,
                 bg_gradient: mate.bgGradient,
                 area: mate.area,
                 city: mate.city,

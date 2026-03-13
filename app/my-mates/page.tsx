@@ -29,6 +29,7 @@ export default async function MyMatesPage() {
         id,
         name,
         emoji,
+        image_url,
         bg_gradient,
         trust_score,
         repeat_count,
@@ -41,17 +42,19 @@ export default async function MyMatesPage() {
   // Filter unique mates and transform
   const uniqueMates = Array.from(new Set(bookings?.map(b => b.mate_id)))
     .map(id => {
-      const b = bookings?.find(b => b.mate_id === id);
-      const m: any = b?.mates;
+      const b: any = bookings?.find(b => b.mate_id === id);
+      const m = b?.mates;
+      if (!m) return null;
       return {
         ...m,
         bgGradient: m.bg_gradient,
+        imageUrl: m.image_url,
         trustScore: m.trust_score,
         repeatCount: m.repeat_count,
         services: m.services
       };
     })
-    .filter(m => m !== undefined);
+    .filter(m => m !== null);
 
   // Timeline events (Real history from bookings)
   const timelineEvents = bookings?.slice(0, 5).map(b => ({
@@ -94,8 +97,16 @@ export default async function MyMatesPage() {
           uniqueMates.map(mate => (
             <div key={mate.id} className="bg-white rounded-2xl shadow-sm p-4 flex gap-3">
               <Link href={`/mates/${mate.id}`}>
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${mate.bgGradient} flex items-center justify-center text-3xl flex-shrink-0`}>
-                  {mate.emoji}
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${mate.bgGradient} overflow-hidden flex items-center justify-center text-3xl flex-shrink-0`}>
+                  {mate.imageUrl ? (
+                    <img
+                      src={mate.imageUrl}
+                      alt={mate.name}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    mate.emoji
+                  )}
                 </div>
               </Link>
               <div className="flex-1 min-w-0">

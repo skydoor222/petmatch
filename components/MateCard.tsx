@@ -8,8 +8,18 @@ export default function MateCard({ mate }: Props) {
   return (
     <Link href={`/mates/${mate.id}`} className="block bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-md transition-shadow">
       {/* Hero */}
-      <div className={`relative h-40 bg-gradient-to-br ${mate.bgGradient} flex items-center justify-center text-6xl`}>
-        {mate.emoji}
+      <div className={`relative h-48 bg-gradient-to-br ${mate.bgGradient} overflow-hidden`}>
+        {mate.imageUrl ? (
+          <img
+            src={mate.imageUrl}
+            alt={mate.name}
+            className="w-full h-full object-cover object-top"
+          />
+        ) : (
+          <div className="flex items-center justify-center h-full text-6xl">
+            {mate.emoji}
+          </div>
+        )}
         <div className="absolute top-2.5 left-2.5 flex items-center gap-1 bg-white/95 rounded-full px-2.5 py-1 shadow-sm">
           <span className="text-xs">🏅</span>
           <span className="text-xs font-bold text-emerald-700">Trust {mate.trustScore.score}</span>

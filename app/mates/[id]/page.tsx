@@ -14,11 +14,21 @@ export default async function MateDetailPage({ params }: { params: Promise<{ id:
   return (
     <div className="pb-36">
       {/* Hero */}
-      <div className={`relative h-56 bg-gradient-to-br ${mate.bgGradient} flex items-center justify-center text-8xl`}>
-        <Link href="/mates" className="absolute top-4 left-4 bg-white/90 rounded-full w-10 h-10 flex items-center justify-center shadow-md text-lg hover:bg-white transition-colors">
+      <div className={`relative h-64 bg-gradient-to-br ${mate.bgGradient} overflow-hidden`}>
+        <Link href="/mates" className="absolute top-4 left-4 bg-white/90 rounded-full w-10 h-10 flex items-center justify-center shadow-md text-lg hover:bg-white transition-colors z-10">
           ←
         </Link>
-        {mate.emoji}
+        {mate.imageUrl ? (
+          <img
+            src={mate.imageUrl}
+            alt={mate.name}
+            className="w-full h-full object-cover object-top"
+          />
+        ) : (
+          <div className="flex items-center justify-center h-full text-8xl">
+            {mate.emoji}
+          </div>
+        )}
       </div>
 
       {/* Profile */}

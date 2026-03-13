@@ -19,6 +19,7 @@ export async function getMates() {
     return mates.map((mate: any) => ({
         ...mate,
         bgGradient: mate.bg_gradient,
+        imageUrl: mate.image_url,
         availableDates: mate.available_dates,
         repeatCount: mate.repeat_count,
         isNew: mate.is_new,
@@ -52,6 +53,7 @@ export async function getMateById(id: string) {
     return {
         ...mate,
         bgGradient: mate.bg_gradient,
+        imageUrl: mate.image_url,
         availableDates: mate.available_dates,
         repeatCount: mate.repeat_count,
         isNew: mate.is_new,
