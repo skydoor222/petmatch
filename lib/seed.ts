@@ -47,7 +47,7 @@ async function seed() {
                 available_dates: mate.availableDates,
                 repeat_count: mate.repeatCount || 0,
                 is_new: mate.isNew || false,
-                trust_score: mate.trust_score
+                trust_score: mate.trustScore
             })
             .select()
             .single();
