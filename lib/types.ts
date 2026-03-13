@@ -91,6 +91,8 @@ export interface Pet {
   trustScore?: TrustScore;
   requestDate?: string; // e.g., "12/24"
   requestTime?: string; // e.g., "14:00〜"
+  requestPeriod?: string; // e.g., "2週間", "毎週月曜日"
+  requestBlocks?: { date: string; time: string; id: string }[];
 }
 
 export type BookingStatus = 'pending' | 'matching' | 'confirmed' | 'completed' | 'cancelled';

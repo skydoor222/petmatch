@@ -221,6 +221,14 @@ export const PETS: Pet[] = [
     area: '世田谷区・三軒茶屋',
     status: 'looking_for_mate',
     distance: '200m以内',
+    requestDate: '12月24日',
+    requestTime: '14:00から',
+    requestPeriod: '毎週火・木 (1ヶ月間)',
+    requestBlocks: [
+      { id: 'b1', date: '2025-12-24', time: '14:00-16:00' },
+      { id: 'b2', date: '2025-12-26', time: '14:00-16:00' },
+      { id: 'b3', date: '2025-12-31', time: '14:00-16:00' },
+    ]
   },
   {
     id: 'p2',
@@ -234,6 +242,13 @@ export const PETS: Pet[] = [
     area: '世田谷区・用賀',
     status: 'looking_for_mate',
     distance: '500m以内',
+    requestDate: '12月25日',
+    requestTime: '16:00から',
+    requestPeriod: '平日毎日 (長期可)',
+    requestBlocks: [
+      { id: 'b4', date: '2025-12-25', time: '16:00-17:30' },
+      { id: 'b5', date: '2025-12-26', time: '16:00-17:30' },
+    ]
   },
   {
     id: 'p3',
@@ -247,6 +262,14 @@ export const PETS: Pet[] = [
     area: '渋谷区・恵比寿',
     status: 'looking_for_mate',
     distance: '1.2km',
+    requestDate: '12月28日',
+    requestTime: '10:00から',
+    requestPeriod: '3日間限定',
+    requestBlocks: [
+      { id: 'b6', date: '2025-12-28', time: '10:00-11:00' },
+      { id: 'b7', date: '2025-12-29', time: '10:00-11:00' },
+      { id: 'b8', date: '2025-12-30', time: '10:00-11:00' },
+    ]
   },
   {
     id: 'p4',
@@ -260,6 +283,9 @@ export const PETS: Pet[] = [
     area: '目黒区・中目黒',
     status: 'booked',
     distance: '800m',
+    requestDate: '1月5日',
+    requestTime: '09:00から',
+    requestBlocks: []
   },
   {
     id: 'p5',
@@ -273,6 +299,11 @@ export const PETS: Pet[] = [
     area: '世田谷区・下北沢',
     status: 'looking_for_mate',
     distance: '350m',
+    requestDate: '12月30日',
+    requestTime: '13:00から',
+    requestBlocks: [
+      { id: 'b9', date: '2025-12-30', time: '13:00-15:00' },
+    ]
   },
 ];
 

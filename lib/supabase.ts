@@ -81,6 +81,10 @@ export async function getPets() {
     return pets.map((pet: any) => ({
         ...pet,
         imageUrl: pet.image_url,
+        requestDate: pet.request_date,
+        requestTime: pet.request_time,
+        requestPeriod: pet.request_period,
+        requestBlocks: pet.request_blocks,
     }));
 }
 
@@ -96,5 +100,9 @@ export async function getPetById(id: string) {
     return {
         ...pet,
         imageUrl: pet.image_url,
+        requestDate: pet.request_date,
+        requestTime: pet.request_time,
+        requestPeriod: pet.request_period,
+        requestBlocks: pet.request_blocks,
     };
 }

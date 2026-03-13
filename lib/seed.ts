@@ -24,7 +24,11 @@ async function seed() {
             image_url: pet.imageUrl,
             description: pet.description,
             area: pet.area,
-            status: pet.status
+            status: pet.status,
+            request_date: pet.requestDate,
+            request_time: pet.requestTime,
+            request_period: pet.requestPeriod,
+            request_blocks: pet.requestBlocks
         });
         if (error) console.error(`Error inserting pet ${pet.name}:`, error);
         else console.log(`Inserted pet: ${pet.name}`);
