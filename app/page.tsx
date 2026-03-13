@@ -14,7 +14,12 @@ const CATEGORIES = [
 export default async function HomePage() {
   noStore();
   const supabase = await createClient();
-  const { data: petsData } = await supabase.from('pets').select('*');
+  const { data: petsData, error: petsError } = await supabase.from('pets').select('*');
+
+  if (petsError) {
+    console.error('Pets Fetch Error:', petsError);
+  }
+
   const pets = (petsData || []).map((pet: any) => ({
     ...pet,
     imageUrl: pet.image_url,
@@ -88,6 +93,16 @@ export default async function HomePage() {
               <Plus size={24} className="text-gray-300" />
             </div>
             <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No active requests</p>
+            {petsError && (
+              <p className="text-[10px] text-rose-500 mt-2 font-mono">
+                Error: {petsError.message} ({petsError.code})
+              </p>
+            )}
+            {!petsError && petsData?.length === 0 && (
+              <p className="text-[10px] text-teal-500 mt-2 font-mono">
+                Connected to DB (0 rows)
+              </p>
+            )}
           </div>
         )}
       </div>
