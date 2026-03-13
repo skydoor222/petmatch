@@ -74,3 +74,17 @@ export interface RequestFormData {
   petNote: string;
   message: string;
 }
+
+export interface Pet {
+  id: string;
+  owner_id?: string;
+  name: string;
+  breed: string;
+  category: 'dog' | 'cat' | 'rabbit' | 'other';
+  age: string;
+  gender: 'male' | 'female';
+  imageUrl?: string;
+  description: string;
+  area: string;
+  status: 'looking_for_mate' | 'booked' | 'none';
+}

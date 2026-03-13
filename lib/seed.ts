@@ -1,15 +1,17 @@
 import { supabase } from './supabase';
-import { MATES, RELATIONSHIP_TIMELINE } from './mockData';
+import { MATES, RELATIONSHIP_TIMELINE, PETS } from './mockData';
 
 async function seed() {
     console.log('Starting seed...');
 
-    // 1. Clear existing data (in reverse order of dependencies)
+    // 1. Clear existing data
     await supabase.from('timeline').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await supabase.from('reviews').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await supabase.from('services').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await supabase.from('mates').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+    await supabase.from('pets').delete().neq('id', '00000000-0000-0000-0000-000000000000');
 
+    // 2. Insert Mates
     for (const mate of MATES) {
         const { data: mateData, error: mateError } = await supabase
             .from('mates')
@@ -51,12 +53,27 @@ async function seed() {
             rating: r.rating,
             date: r.date,
             comment: r.comment,
-            repeat_count: r.repeatCount
+            repeat_count: r.repeat_count
         }));
         await supabase.from('reviews').insert(reviewsToInsert);
     }
 
-    // Insert timeline
+    // 3. Insert Pets
+    for (const pet of PETS) {
+        await supabase.from('pets').insert({
+            name: pet.name,
+            breed: pet.breed,
+            category: pet.category,
+            age: pet.age,
+            gender: pet.gender,
+            image_url: pet.imageUrl,
+            description: pet.description,
+            area: pet.area,
+            status: pet.status
+        });
+    }
+
+    // 4. Insert timeline
     const timelineToInsert = RELATIONSHIP_TIMELINE.map(t => ({
         emoji: t.emoji,
         text: t.text,

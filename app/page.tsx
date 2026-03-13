@@ -1,89 +1,95 @@
-import Link from 'next/link';
-import MateCard from '@/components/MateCard';
+import PetCard from '@/components/PetCard';
 import BottomNav from '@/components/BottomNav';
-import { getMates } from '@/lib/supabase';
-import { Search, MapPin, Calendar, PawPrint, Sparkles, User } from 'lucide-react';
+import { getPets } from '@/lib/supabase';
+import { Search, MapPin, SlidersHorizontal, Plus, Sparkles, Dog, Cat, Rabbit, Bird } from 'lucide-react';
 
-const SERVICES = [
-  { type: 'walk', label: '散歩', icon: PawPrint },
-  { type: 'hospital', label: '通院', icon: Search },
-  { type: 'home_care', label: 'ケア', icon: Sparkles },
-  { type: 'night', label: '夜間', icon: Calendar },
+const CATEGORIES = [
+  { id: 'all', label: 'All', icon: Sparkles },
+  { id: 'dog', label: 'Dogs', icon: Dog },
+  { id: 'cat', label: 'Cats', icon: Cat },
+  { id: 'rabbit', label: 'Small', icon: Rabbit },
 ];
 
-export default async function Home() {
-  const mates = await getMates();
+export default async function HomePage() {
+  const pets = await getPets();
 
   return (
-    <div className="pb-32 bg-gray-50/50">
-      {/* Hero Section */}
-      <div className="relative pt-16 pb-24 px-6 premium-gradient overflow-hidden">
-        {/* Abstract Background Shapes */}
-        <div className="absolute top-0 right-0 -translate-y-12 translate-x-12 w-64 h-64 bg-teal-400/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-12 w-64 h-64 bg-emerald-400/20 rounded-full blur-3xl" />
-
-        <div className="relative z-10 max-w-md mx-auto">
-          <header className="flex justify-between items-center mb-8">
-            <div className="text-white font-extrabold text-xl tracking-tight">PetMatch</div>
-            <div className="w-10 h-10 rounded-full glass flex items-center justify-center text-white">
-              <User size={20} />
-            </div>
-          </header>
-
-          <h1 className="text-white text-3xl md:text-4xl font-extrabold leading-[1.15] mb-4">
-            大切な家族に、<br />もう一人の相棒を。
-          </h1>
-          <p className="text-teal-50 text-base font-medium opacity-90 mb-8 max-w-[280px]">
-            プロフェッショナルなMateが、あなたとペットを支えます。
-          </p>
-
-          {/* Search Bar - Modern Integrated look */}
-          <div className="bg-white/95 backdrop-blur-xl rounded-[2.5rem] shadow-2xl p-2 flex items-center border border-white/40">
-            <div className="flex-1 flex items-center gap-3 pl-4 border-r border-gray-100 py-2">
-              <MapPin size={18} className="text-teal-600" />
-              <div className="text-left">
-                <div className="text-[10px] uppercase tracking-wider font-bold text-gray-400">Area</div>
-                <div className="text-sm font-bold text-gray-900">世田谷区</div>
+    <div className="pb-36 bg-gray-50/50 min-h-screen">
+      {/* Premium Search Header */}
+      <div className="bg-white px-6 pt-16 pb-8 sticky top-0 z-30 shadow-sm border-b border-gray-100/50">
+        <div className="max-w-md mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-lg shadow-teal-900/20">
+                <Sparkles size={20} />
               </div>
+              <h1 className="text-2xl font-heading text-gray-900 tracking-tight">PetMatch</h1>
             </div>
-            <div className="px-3">
-              <Link href="/mates" className="w-12 h-12 bg-teal-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-teal-900/20 hover:bg-teal-700 transition-all active:scale-95">
-                <Search size={22} />
-              </Link>
+            <button className="w-10 h-10 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-teal-600 transition-all">
+              <SlidersHorizontal size={20} />
+            </button>
+          </div>
+
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+              <Search size={18} className="text-gray-300 group-focus-within:text-teal-500 transition-colors" />
             </div>
+            <input
+              type="text"
+              placeholder="What kind of pet are you looking for?"
+              className="w-full bg-gray-50 border border-gray-100 rounded-[2rem] pl-14 pr-6 py-4 text-sm font-bold text-gray-900 placeholder:text-gray-300 focus:outline-none focus:ring-4 focus:ring-teal-500/5 focus:bg-white transition-all card-shadow"
+            />
           </div>
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className="relative -mt-10 px-6">
-        {/* Service Chips */}
-        <div className="flex gap-3 overflow-x-auto hide-scrollbar mb-8 py-2">
-          {SERVICES.map(s => {
-            const Icon = s.icon;
-            return (
-              <Link key={s.type} href={`/mates?service=${s.type}`}
-                className="flex-shrink-0 bg-white border border-gray-100 flex items-center gap-2.5 px-5 py-3 rounded-2xl shadow-sm hover:shadow-md hover:border-teal-100 transition-all active:scale-95">
-                <div className="w-8 h-8 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600">
-                  <Icon size={18} />
-                </div>
-                <span className="text-sm font-bold text-gray-700 whitespace-nowrap">{s.label}</span>
-              </Link>
-            );
-          })}
+      {/* Categories Horizontal Scroll */}
+      <div className="px-6 py-6 overflow-x-auto no-scrollbar flex gap-3">
+        {CATEGORIES.map((cat, i) => {
+          const Icon = cat.icon;
+          return (
+            <button
+              key={cat.id}
+              className={`flex-shrink-0 flex items-center gap-2.5 px-6 py-3.5 rounded-2xl border transition-all duration-300
+                ${i === 0
+                  ? 'bg-teal-600 border-teal-600 text-white shadow-lg shadow-teal-900/10'
+                  : 'bg-white border-gray-100 text-gray-500 hover:border-teal-200 hover:text-teal-600'}`}
+            >
+              <Icon size={18} />
+              <span className="text-xs font-black uppercase tracking-widest">{cat.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Main Grid: Mercari Style */}
+      <div className="px-6">
+        <div className="flex items-center justify-between mb-6 px-2">
+          <h2 className="text-lg font-heading text-gray-900 uppercase tracking-widest">New Requests</h2>
+          <div className="text-[10px] font-black text-teal-600 uppercase tracking-widest border-b border-teal-100 pb-0.5">Explore All</div>
         </div>
 
-        {/* List Section */}
-        <div className="flex flex-col gap-6">
-          <div className="flex justify-between items-end px-1">
-            <h2 className="text-xl font-bold text-gray-900">近くのMate</h2>
-            <Link href="/mates" className="text-sm font-bold text-teal-600 hover:text-teal-700">すべて見る</Link>
-          </div>
-
-          <div className="grid grid-cols-1 gap-5">
-            {mates.map((mate: any) => <MateCard key={mate.id} mate={mate} />)}
-          </div>
+        <div className="grid grid-cols-2 gap-4">
+          {pets.map((pet: any) => (
+            <PetCard key={pet.id} pet={pet} />
+          ))}
         </div>
+
+        {pets.length === 0 && (
+          <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-gray-100 mt-4">
+            <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center mx-auto mb-4">
+              <Plus size={24} className="text-gray-300" />
+            </div>
+            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No active requests</p>
+          </div>
+        )}
+      </div>
+
+      {/* Floating Action Button: "Post" style */}
+      <div className="fixed bottom-32 right-6 z-40">
+        <button className="w-16 h-16 rounded-[2rem] bg-teal-600 text-white shadow-2xl shadow-teal-900/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+          <Plus size={32} strokeWidth={2.5} />
+        </button>
       </div>
 
       <BottomNav />

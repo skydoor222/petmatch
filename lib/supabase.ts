@@ -70,3 +70,31 @@ export async function getMateById(id: string) {
         }))
     };
 }
+
+export async function getPets() {
+    const { data: pets, error } = await supabase
+        .from('pets')
+        .select('*');
+
+    if (error) throw error;
+
+    return pets.map((pet: any) => ({
+        ...pet,
+        imageUrl: pet.image_url,
+    }));
+}
+
+export async function getPetById(id: string) {
+    const { data: pet, error } = await supabase
+        .from('pets')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+    if (error) return null;
+
+    return {
+        ...pet,
+        imageUrl: pet.image_url,
+    };
+}

@@ -1,4 +1,4 @@
-import { Mate } from './types';
+import { Mate, Pet } from './types';
 
 export const MATES: Mate[] = [
   {
@@ -207,6 +207,69 @@ export const MATES: Mate[] = [
 ];
 
 export const MY_MATES = [MATES[0], MATES[1]];
+
+export const PETS: Pet[] = [
+  {
+    id: 'p1',
+    name: 'レオ',
+    breed: '柴犬',
+    category: 'dog',
+    age: '3歳',
+    gender: 'male',
+    imageUrl: '/pets/leo.png',
+    description: '元気いっぱいの柴犬です！お散歩が大好きで、他のワンちゃんとも仲良くできます。週に2回ほど、日中の散歩代行をお願いできる方を探しています。',
+    area: '世田谷区・三軒茶屋',
+    status: 'looking_for_mate',
+  },
+  {
+    id: 'p2',
+    name: 'モモ',
+    breed: 'ゴールデンレトリバー',
+    category: 'dog',
+    age: '5歳',
+    gender: 'female',
+    imageUrl: '/pets/momo.png',
+    description: 'おっとりした性格のゴールデンです。人が大好きで、誰にでもしっぽを振ります。平日の夕方にお散歩をお願いしたいです。',
+    area: '世田谷区・用賀',
+    status: 'looking_for_mate',
+  },
+  {
+    id: 'p3',
+    name: 'タマ',
+    breed: '三毛猫',
+    category: 'cat',
+    age: '2歳',
+    gender: 'female',
+    imageUrl: '/pets/tama.png',
+    description: '少し人見知りですが、慣れると甘えん坊です。出張中に1日1回のご飯とトイレの掃除をお願いできる方を探しています。',
+    area: '渋谷区・恵比寿',
+    status: 'looking_for_mate',
+  },
+  {
+    id: 'p4',
+    name: 'プク',
+    breed: 'ミニウサギ',
+    category: 'rabbit',
+    age: '1歳',
+    gender: 'male',
+    imageUrl: '/pets/puku.png',
+    description: '白くてふわふわのウサギです。人にかまってもらうのが大好き。週末の旅行中にお世話をお願いしたいです。',
+    area: '目黒区・中目黒',
+    status: 'booked',
+  },
+  {
+    id: 'p5',
+    name: 'タロウ',
+    breed: 'フレンチブルドッグ',
+    category: 'dog',
+    age: '4歳',
+    gender: 'male',
+    imageUrl: '/pets/taro.png',
+    description: 'おしゃれが好きなフレブルです！皮膚が少し弱いので、ケアに慣れている方だと嬉しいです。',
+    area: '世田谷区・下北沢',
+    status: 'looking_for_mate',
+  },
+];
 
 export const RELATIONSHIP_TIMELINE = [
   { emoji: '🐾', text: '田中 美咲さんと12回目の散歩を完了', date: '2026年3月', color: 'bg-emerald-500' },
