@@ -75,13 +75,13 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
                         <span className="text-[10px] font-black uppercase tracking-widest">現在の依頼スケジュール</span>
                     </div>
                     <div className="space-y-2">
-                        <div className="text-3xl font-heading">{pet.requestDate} {pet.requestTime}</div>
-                        {pet.requestPeriod && (
-                            <div className="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-lg text-xs font-bold border border-white/10">
-                                <Sparkles size={12} />
-                                <span>期間: {pet.requestPeriod}</span>
-                            </div>
-                        )}
+                        <div className="text-3xl font-heading">
+                            {pet.requestDate || '3月15日(日)'} {pet.requestTime || '14:00〜'}
+                        </div>
+                        <div className="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-lg text-xs font-bold border border-white/10">
+                            <Sparkles size={12} />
+                            <span>期間: {pet.requestPeriod || '単発の依頼'}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,16 +141,12 @@ export default async function PetDetailPage({ params }: { params: Promise<{ id: 
             {/* Floating CTA */}
             <div className="fixed bottom-0 left-0 right-0 p-6 z-50 pointer-events-none">
                 <div className="max-w-md mx-auto pointer-events-auto">
-                    <div className="glass px-6 py-5 rounded-[2.5rem] shadow-2xl flex items-center gap-4 border border-white/50">
-                        <div className="flex-1">
-                            <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">依頼内容</div>
-                            <div className="text-lg font-heading text-orange-600 truncate">{pet.requestDate} {pet.requestTime}</div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <button className="w-16 h-16 rounded-[1.8rem] bg-white border border-gray-100 flex items-center justify-center text-gray-300 hover:text-rose-500 hover:border-rose-100 transition-all active:scale-95 shadow-sm">
+                    <div className="glass px-6 py-5 rounded-[2.5rem] shadow-2xl flex items-center justify-between gap-4 border border-white/50">
+                        <div className="flex items-center gap-3 w-full">
+                            <button className="w-16 h-16 rounded-[1.8rem] bg-white border border-gray-100 flex items-center justify-center text-gray-300 hover:text-rose-500 hover:border-rose-100 transition-all active:scale-95 shadow-sm shrink-0">
                                 <Heart size={24} />
                             </button>
-                            <Link href={`/pets/${pet.id}/accept`} className="min-w-[140px] h-16 rounded-[1.8rem] bg-orange-600 text-white font-bold flex items-center justify-center gap-3 hover:bg-orange-700 transition-all active:scale-95 shadow-xl shadow-orange-900/20 px-6">
+                            <Link href={`/pets/${pet.id}/accept`} className="flex-1 h-16 rounded-[1.8rem] bg-orange-600 text-white font-bold flex items-center justify-center gap-3 hover:bg-orange-700 transition-all active:scale-95 shadow-xl shadow-orange-900/20 px-6">
                                 <Calendar size={18} />
                                 <span>お預かりします</span>
                             </Link>

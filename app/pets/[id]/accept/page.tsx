@@ -62,15 +62,19 @@ export default function AcceptRequestPage({ params }: { params: Promise<{ id: st
                     </div>
 
                     <div className="space-y-3">
-                        {pet.requestBlocks?.map((block: any) => {
+                        {(pet.requestBlocks?.length > 0 ? pet.requestBlocks : [
+                            { id: 'sample-1', date: '今日 3月13日(金)', time: '14:00 - 18:00' },
+                            { id: 'sample-2', date: '明日 3月14日(土)', time: '10:00 - 12:00' },
+                            { id: 'sample-3', date: '3月17日(火)', time: '18:00 - 21:00' },
+                        ]).map((block: any) => {
                             const isSelected = selectedBlocks.includes(block.id);
                             return (
                                 <button
                                     key={block.id}
                                     onClick={() => toggleBlock(block.id)}
                                     className={`w-full flex items-center justify-between p-5 rounded-2xl border transition-all ${isSelected
-                                            ? 'bg-orange-50 border-orange-200 text-orange-600'
-                                            : 'bg-gray-50 border-gray-50 text-gray-600'
+                                        ? 'bg-orange-50 border-orange-200 text-orange-600'
+                                        : 'bg-gray-50 border-gray-50 text-gray-600'
                                         }`}
                                 >
                                     <div className="flex items-center gap-4">
@@ -102,8 +106,8 @@ export default function AcceptRequestPage({ params }: { params: Promise<{ id: st
                         disabled={selectedBlocks.length === 0}
                         onClick={() => router.push('/messages')}
                         className={`w-full h-18 rounded-[2rem] font-heading text-lg flex items-center justify-center gap-3 transition-all shadow-xl active:scale-[0.98] ${selectedBlocks.length > 0
-                                ? 'bg-orange-600 text-white shadow-orange-900/20'
-                                : 'bg-gray-200 text-gray-400 shadow-none cursor-not-allowed'
+                            ? 'bg-orange-600 text-white shadow-orange-900/20'
+                            : 'bg-gray-200 text-gray-400 shadow-none cursor-not-allowed'
                             }`}
                     >
                         <MessageSquare size={20} fill="currentColor" />
