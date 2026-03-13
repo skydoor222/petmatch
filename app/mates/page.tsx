@@ -5,7 +5,8 @@ import { getMates } from '@/lib/supabase';
 import { Search, MapPin } from 'lucide-react';
 
 export default async function MatesPage() {
-  const mates = await getMates();
+  const allMates = await getMates();
+  const mates = allMates.filter((m: any) => m.imageUrl);
 
   return (
     <div className="pb-28 bg-gray-50 min-h-screen">
