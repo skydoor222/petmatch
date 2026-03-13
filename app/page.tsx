@@ -16,10 +16,6 @@ export default async function HomePage() {
   const supabase = await createClient();
   const { data: petsData, error: petsError } = await supabase.from('pets').select('*');
 
-  if (petsError) {
-    console.error('Pets Fetch Error:', petsError);
-  }
-
   const pets = (petsData || []).map((pet: any) => ({
     ...pet,
     imageUrl: pet.image_url,
@@ -92,13 +88,7 @@ export default async function HomePage() {
             <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center mx-auto mb-4">
               <Plus size={24} className="text-gray-300" />
             </div>
-            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest text-rose-500">Wait... System Update [Ver 2.1]</p>
-            <div className="mt-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 font-mono text-[10px] text-left">
-              <p>Debug Info:</p>
-              <p>Pets Count: {petsData?.length ?? 'undefined'}</p>
-              {petsError && <p className="text-rose-500">Error: {petsError.message} ({petsError.code})</p>}
-              <p>Env URL: {process.env.NEXT_PUBLIC_SUPABASE_URL?.substring(0, 15)}...</p>
-            </div>
+            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest">No active requests</p>
           </div>
         )}
       </div>
