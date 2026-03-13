@@ -5,13 +5,33 @@ async function seed() {
     console.log('Starting seed...');
 
     // 1. Clear existing data
+    console.log('Clearing old data...');
     await supabase.from('timeline').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await supabase.from('reviews').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await supabase.from('services').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await supabase.from('mates').delete().neq('id', '00000000-0000-0000-0000-000000000000');
     await supabase.from('pets').delete().neq('id', '00000000-0000-0000-0000-000000000000');
 
-    // 2. Insert Mates
+    // 2. Insert Pets
+    console.log('Inserting pets...');
+    for (const pet of PETS) {
+        const { error } = await supabase.from('pets').insert({
+            name: pet.name,
+            breed: pet.breed,
+            category: pet.category,
+            age: pet.age,
+            gender: pet.gender,
+            image_url: pet.imageUrl,
+            description: pet.description,
+            area: pet.area,
+            status: pet.status
+        });
+        if (error) console.error(`Error inserting pet ${pet.name}:`, error);
+        else console.log(`Inserted pet: ${pet.name}`);
+    }
+
+    // 3. Insert Mates
+    console.log('Inserting mates...');
     for (const mate of MATES) {
         const { data: mateData, error: mateError } = await supabase
             .from('mates')
@@ -27,7 +47,7 @@ async function seed() {
                 available_dates: mate.availableDates,
                 repeat_count: mate.repeatCount || 0,
                 is_new: mate.isNew || false,
-                trust_score: mate.trustScore
+                trust_score: mate.trust_score
             })
             .select()
             .single();
@@ -58,22 +78,8 @@ async function seed() {
         await supabase.from('reviews').insert(reviewsToInsert);
     }
 
-    // 3. Insert Pets
-    for (const pet of PETS) {
-        await supabase.from('pets').insert({
-            name: pet.name,
-            breed: pet.breed,
-            category: pet.category,
-            age: pet.age,
-            gender: pet.gender,
-            image_url: pet.imageUrl,
-            description: pet.description,
-            area: pet.area,
-            status: pet.status
-        });
-    }
-
     // 4. Insert timeline
+    console.log('Inserting timeline...');
     const timelineToInsert = RELATIONSHIP_TIMELINE.map(t => ({
         emoji: t.emoji,
         text: t.text,

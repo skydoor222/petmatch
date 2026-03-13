@@ -24,3 +24,5 @@ CREATE POLICY "Public read access for pets" ON pets FOR SELECT USING (true);
 CREATE POLICY "Users can insert their own pets" ON pets FOR INSERT WITH CHECK (auth.uid() = owner_id);
 CREATE POLICY "Users can update their own pets" ON pets FOR UPDATE USING (auth.uid() = owner_id);
 CREATE POLICY "Users can delete their own pets" ON pets FOR DELETE USING (auth.uid() = owner_id);
+-- Allow public insert access for seeding
+CREATE POLICY "Public insert access for pets" ON pets FOR INSERT WITH CHECK (true);

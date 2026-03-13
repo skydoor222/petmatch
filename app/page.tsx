@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import PetCard from '@/components/PetCard';
 import BottomNav from '@/components/BottomNav';
 import { getPets } from '@/lib/supabase';
